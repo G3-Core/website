@@ -1,84 +1,65 @@
-import { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import {
-  CodeBracketIcon,
-  DevicePhoneMobileIcon,
-  RocketLaunchIcon,
-  ShoppingCartIcon,
-} from '@heroicons/react/24/outline';
-
-const services = [
-  {
-    title: 'Desenvolvimento Web',
-    description: 'Sites modernos e responsivos desenvolvidos com as mais recentes tecnologias do mercado.',
-    icon: CodeBracketIcon,
-  },
-  {
-    title: 'Aplicações Mobile',
-    description: 'Apps nativos e híbridos que proporcionam a melhor experiência para seus usuários.',
-    icon: DevicePhoneMobileIcon,
-  },
-  {
-    title: 'E-commerce',
-    description: 'Lojas virtuais completas e personalizadas para impulsionar suas vendas online.',
-    icon: ShoppingCartIcon,
-  },
-  {
-    title: 'Marketing Digital',
-    description: 'Estratégias completas para aumentar sua visibilidade e atrair mais clientes.',
-    icon: RocketLaunchIcon,
-  },
-];
+import { motion } from 'framer-motion';
+import { useApp } from '../contexts/AppContext';
+import { CodeBracketIcon, GlobeAltIcon, CommandLineIcon } from '@heroicons/react/24/outline';
 
 const Services = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
+  const { t } = useApp();
+
+  const services = [
+    {
+      icon: GlobeAltIcon,
+      title: t.services.web.title,
+      description: t.services.web.description,
+    },
+    {
+      icon: CodeBracketIcon,
+      title: t.services.app.title,
+      description: t.services.app.description,
+    },
+    {
+      icon: CommandLineIcon,
+      title: t.services.software.title,
+      description: t.services.software.description,
+    },
+  ];
 
   return (
-    <section id="services" className="py-20 bg-gray-50">
+    <section id="services" className="py-20 bg-gray-50 dark:bg-dark-light">
       <div className="container">
-        <div className="text-center mb-16">
-          <h2 className="section-title">
-            Nossos{' '}
-            <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-              Serviços
-            </span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            {t.services.title}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Oferecemos soluções completas em desenvolvimento web e mobile para transformar suas ideias em realidade.
+          <p className="text-gray-600 dark:text-dark-text-secondary max-w-2xl mx-auto">
+            {t.services.subtitle}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              className="bg-white dark:bg-dark p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <div className="w-14 h-14 bg-gradient-to-r from-primary to-secondary rounded-lg p-3 mb-6 text-white">
-                <service.icon className="w-full h-full" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 group-hover:text-primary transition-colors">
+              <service.icon className="w-12 h-12 text-primary mb-6" />
+              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
                 {service.title}
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-dark-text-secondary">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
-        <div className="text-center mt-16">
-          <button className="btn-primary">
-            Ver Todos os Serviços
-          </button>
         </div>
       </div>
     </section>

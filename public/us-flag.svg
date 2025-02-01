@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="32" height="32" fill="#ffffff"/>
+  <rect y="0" width="32" height="2.46154" fill="#B31942"/>
+  <rect y="4.92308" width="32" height="2.46154" fill="#B31942"/>
+  <rect y="9.84615" width="32" height="2.46154" fill="#B31942"/>
+  <rect y="14.7692" width="32" height="2.46154" fill="#B31942"/>
+  <rect y="19.6923" width="32" height="2.46154" fill="#B31942"/>
+  <rect y="24.6154" width="32" height="2.46154" fill="#B31942"/>
+  <rect y="29.5385" width="32" height="2.46154" fill="#B31942"/>
+  <rect width="16" height="17.2308" fill="#002868"/>
+  <circle cx="8" cy="8.61538" r="1" fill="white"/>
+  <circle cx="4" cy="8.61538" r="1" fill="white"/>
+  <circle cx="12" cy="8.61538" r="1" fill="white"/>
+  <circle cx="6" cy="6.15385" r="1" fill="white"/>
+  <circle cx="10" cy="6.15385" r="1" fill="white"/>
+  <circle cx="8" cy="3.69231" r="1" fill="white"/>
+  <circle cx="4" cy="3.69231" r="1" fill="white"/>
+  <circle cx="12" cy="3.69231" r="1" fill="white"/>
+  <circle cx="6" cy="11.0769" r="1" fill="white"/>
+  <circle cx="10" cy="11.0769" r="1" fill="white"/>
+  <circle cx="8" cy="13.5385" r="1" fill="white"/>
+  <circle cx="4" cy="13.5385" r="1" fill="white"/>
+  <circle cx="12" cy="13.5385" r="1" fill="white"/>
+</svg> 

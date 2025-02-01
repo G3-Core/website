@@ -1,88 +1,57 @@
+import { useApp } from '../contexts/AppContext';
+
 const Footer = () => {
+  const { t } = useApp();
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-dark text-white">
-      <div className="container py-12">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Logo e Descrição */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-              G3 Tech
+    <footer className="bg-gray-900 dark:bg-dark text-white py-12">
+      <div className="container">
+        <div className="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+              {t.footer.company.title}
             </h3>
-            <p className="text-gray-400">
-              Transformando ideias em soluções digitais inovadoras para impulsionar seu negócio.
+            <p className="text-gray-400 dark:text-dark-text-secondary mb-4">
+              {t.footer.company.description}
             </p>
           </div>
 
-          {/* Links Rápidos */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Links Rápidos</h4>
-            <ul className="space-y-2">
-              {['Início', 'Sobre', 'Serviços', 'Contato'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+              {t.footer.contact.title}
+            </h3>
+            <div className="space-y-2 text-gray-400 dark:text-dark-text-secondary">
+              <p>{t.footer.contact.address}</p>
+              <p>{t.footer.contact.phone}</p>
+              <p>{t.footer.contact.email}</p>
+            </div>
           </div>
 
-          {/* Serviços */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Nossos Serviços</h4>
-            <ul className="space-y-2">
-              {[
-                'Desenvolvimento Web',
-                'Aplicações Mobile',
-                'E-commerce',
-                'Marketing Digital',
-              ].map((service) => (
-                <li key={service}>
-                  <a
-                    href="#services"
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {service}
-                  </a>
-                </li>
+            <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+              {t.footer.social.title}
+            </h3>
+            <div className="flex space-x-4">
+              {t.footer.social.links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-primary transition-colors"
+                >
+                  {link.name}
+                </a>
               ))}
-            </ul>
-          </div>
-
-          {/* Contato */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Contato</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>g3tech@gmail.com</li>
-              <li>(15) 99695-5275</li>
-            </ul>
+            </div>
           </div>
         </div>
 
-        {/* Linha Divisória */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} WebSystems. Todos os direitos reservados.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Termos de Uso
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                Política de Privacidade
-              </a>
-            </div>
-          </div>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 dark:text-dark-text-secondary">
+          <p>
+            © {currentYear} {t.footer.copyright}
+          </p>
         </div>
       </div>
     </footer>

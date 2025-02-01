@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -12,7 +13,14 @@ export default {
       colors: {
         'primary': '#2563eb',
         'secondary': '#7c3aed',
-        'dark': '#111827',
+        'dark': {
+          DEFAULT: '#111827',
+          light: '#1f2937',
+          text: {
+            primary: '#f3f4f6',
+            secondary: '#d1d5db'
+          }
+        }
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-in',
