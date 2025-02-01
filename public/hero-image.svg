@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="gradient1">
+            <stop stop-color="#2563eb" offset="0%"/>
+            <stop stop-color="#7c3aed" offset="100%"/>
+        </linearGradient>
+        <linearGradient x1="100%" y1="0%" x2="0%" y2="100%" id="gradient2">
+            <stop stop-color="#2563eb" offset="0%"/>
+            <stop stop-color="#7c3aed" offset="100%"/>
+        </linearGradient>
+    </defs>
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background Elements -->
+        <circle fill="url(#gradient1)" opacity="0.1" cx="600" cy="100" r="50"/>
+        <circle fill="url(#gradient2)" opacity="0.1" cx="200" cy="500" r="70"/>
+        
+        <!-- Main Elements -->
+        <rect fill="url(#gradient1)" x="250" y="150" width="300" height="200" rx="20"/>
+        <rect fill="white" x="270" y="170" width="260" height="160" rx="10"/>
+        
+        <!-- Code Lines -->
+        <rect fill="#E2E8F0" x="290" y="190" width="180" height="10" rx="5"/>
+        <rect fill="#E2E8F0" x="290" y="210" width="140" height="10" rx="5"/>
+        <rect fill="#E2E8F0" x="290" y="230" width="160" height="10" rx="5"/>
+        
+        <!-- Browser Controls -->
+        <circle fill="#FC8181" cx="290" cy="130" r="5"/>
+        <circle fill="#F6E05E" cx="310" cy="130" r="5"/>
+        <circle fill="#68D391" cx="330" cy="130" r="5"/>
+        
+        <!-- Floating Elements -->
+        <rect fill="url(#gradient2)" x="150" y="300" width="100" height="80" rx="10"/>
+        <rect fill="url(#gradient1)" x="550" y="250" width="120" height="90" rx="10"/>
+        
+        <!-- Decorative Lines -->
+        <path d="M100,200 L200,200" stroke="url(#gradient1)" stroke-width="4" stroke-linecap="round"/>
+        <path d="M600,400 L700,400" stroke="url(#gradient2)" stroke-width="4" stroke-linecap="round"/>
+    </g>
+</svg> 
