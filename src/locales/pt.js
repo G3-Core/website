@@ -3,6 +3,7 @@ export const pt = {
     home: 'Início',
     services: 'Serviços',
     about: 'Sobre',
+    portfolio: 'Portfólio',
     contact: 'Contato',
     cta: 'Comece Agora',
   },
@@ -65,6 +66,17 @@ export const pt = {
       },
     },
   },
+  portfolio: {
+    badge: "Nosso Portfólio",
+    title: "Projetos Recentes",
+    subtitle: "Conheça alguns dos projetos que desenvolvemos recentemente, demonstrando nossa expertise em desenvolvimento web.",
+    comingSoon: {
+      title: "Mais projetos em breve",
+      description: "Estamos constantemente desenvolvendo novos projetos inovadores. Fique atento para mais atualizações em nosso portfólio."
+    },
+    firstProject: "Primeiro Projeto",
+    viewProject: "Ver Projeto",
+  },
   contact: {
     title: 'Entre em Contato',
     subtitle: 'Estamos prontos para transformar sua ideia em realidade.',
@@ -73,6 +85,7 @@ export const pt = {
       email: 'E-mail',
       message: 'Mensagem',
       submit: 'Enviar Mensagem',
+      sending: 'Enviando...',
     },
     info: {
       title: 'Informações de Contato',
@@ -80,6 +93,11 @@ export const pt = {
       email: 'E-mail',
       address: 'Endereço',
     },
+    notifications: {
+      success: 'Mensagem enviada com sucesso! Entraremos em contato em breve.',
+      error: 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.'
+    },
+    badge: 'Entre em contato',
   },
   footer: {
     company: {

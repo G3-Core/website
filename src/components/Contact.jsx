@@ -1,15 +1,113 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { useForm } from '@formspree/react';
 import { EnvelopeIcon } from '@heroicons/react/24/outline';
 import { FaWhatsapp, FaLinkedinIn } from 'react-icons/fa';
 import { useApp } from '../contexts/AppContext';
+import Confetti from 'react-confetti';
 
 const Contact = () => {
   const { t } = useApp();
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Aqui você pode adicionar a lógica para enviar o formulário
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const formspreeId = 'xvgzerdd';
+  const [state, handleFormspreeSubmit] = useForm(formspreeId);
+  const [notification, setNotification] = useState({ show: false, type: '', message: '' });
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [confettiSize, setConfettiSize] = useState({ width: 0, height: 0 });
+  const formRef = useRef(null);
+  const [submissionCount, setSubmissionCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Atualiza o tamanho do confetti com base no tamanho da janela
+  useEffect(() => {
+    const updateConfettiSize = () => {
+      setConfettiSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    updateConfettiSize();
+    window.addEventListener('resize', updateConfettiSize);
+    
+    return () => window.removeEventListener('resize', updateConfettiSize);
+  }, []);
+
+  // Manipula a mudança nos campos do formulário
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
   };
+
+  // Handler personalizado para o envio do formulário
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      await handleFormspreeSubmit(e);
+      // Incrementa o contador de submissões para acionar o efeito
+      setSubmissionCount(prev => prev + 1);
+    } catch (error) {
+      console.error("Erro ao enviar formulário:", error);
+      setNotification({
+        show: true,
+        type: 'error',
+        message: t.contact.notifications?.error || "Erro ao enviar mensagem. Tente novamente."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Efeito para limpar os campos após o envio bem-sucedido
+  useEffect(() => {
+    if (state.succeeded) {
+      setFormData({
+        name: '',
+        email: '',
+        message: ''
+      });
+      setNotification({
+        show: true,
+        type: 'success',
+        message: t.contact.notifications?.success || "Mensagem enviada com sucesso!"
+      });
+      
+      // Mostrar confetti
+      setShowConfetti(true);
+      
+      // Esconder confetti após 6 segundos
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 6000);
+      
+    } else if (state.errors && state.errors.length > 0) {
+      setNotification({
+        show: true,
+        type: 'error',
+        message: t.contact.notifications?.error || "Erro ao enviar mensagem. Tente novamente."
+      });
+    }
+  }, [state.succeeded, state.errors, t, submissionCount]);
+
+  // Esconde a notificação após 5 segundos
+  useEffect(() => {
+    let timer;
+    if (notification.show) {
+      timer = setTimeout(() => {
+        setNotification(prev => ({ ...prev, show: false }));
+      }, 5000);
+    }
+    return () => clearTimeout(timer);
+  }, [notification.show]);
 
   const contactButtons = [
     {
@@ -43,6 +141,47 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
+      {/* Confetti animation */}
+      {showConfetti && (
+        <Confetti
+          width={confettiSize.width}
+          height={confettiSize.height}
+          recycle={false}
+          numberOfPieces={800}
+          gravity={0.15}
+          colors={['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6']}
+        />
+      )}
+      
+      {/* Notification */}
+      <AnimatePresence>
+        {notification.show && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className={`fixed top-24 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg ${
+              notification.type === 'success'
+                ? 'bg-green-500 text-white'
+                : 'bg-red-500 text-white'
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              {notification.type === 'success' ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              )}
+              <span>{notification.message}</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Background elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 dark:from-dark dark:to-dark-light z-0"></div>
       <div className="absolute top-20 right-0 w-80 h-80 bg-primary/5 dark:bg-primary/10 rounded-full filter blur-3xl"></div>
@@ -107,6 +246,7 @@ const Contact = () => {
           </motion.div>
 
           <motion.form
+            ref={formRef}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -126,6 +266,9 @@ const Contact = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-gray-50/50 dark:bg-dark/50 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
                     required
                   />
@@ -138,6 +281,9 @@ const Contact = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-gray-50/50 dark:bg-dark/50 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
                     required
                   />
@@ -150,7 +296,10 @@ const Contact = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows="4"
+                  value={formData.message}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 rounded-lg bg-gray-50/50 dark:bg-dark/50 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary transition-colors"
                   required
                 ></textarea>
@@ -160,9 +309,20 @@ const Contact = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit" 
-                className="mt-6 w-full px-6 py-3 bg-gradient-to-r from-primary to-secondary hover:from-primary-light hover:to-secondary-light text-white rounded-xl font-medium transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30"
+                disabled={isSubmitting}
+                className="mt-6 w-full px-6 py-3 bg-gradient-to-r from-primary to-secondary hover:from-primary-light hover:to-secondary-light text-white rounded-xl font-medium transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {t.contact.form.submit}
+                {isSubmitting ? (
+                  <div className="flex items-center justify-center space-x-2">
+                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>{t.contact.form.sending || "Enviando..."}</span>
+                  </div>
+                ) : (
+                  t.contact.form.submit
+                )}
               </motion.button>
             </div>
           </motion.form>

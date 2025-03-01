@@ -3,6 +3,7 @@ export const en = {
     home: 'Home',
     services: 'Services',
     about: 'About',
+    portfolio: 'Portfolio',
     contact: 'Contact',
     cta: 'Get Started',
   },
@@ -65,6 +66,17 @@ export const en = {
       },
     },
   },
+  portfolio: {
+    badge: "Our Portfolio",
+    title: "Recent Projects",
+    subtitle: "Explore some of our recently developed projects that showcase our web development expertise.",
+    comingSoon: {
+      title: "More projects coming soon",
+      description: "We are constantly developing new innovative projects. Stay tuned for more updates to our portfolio."
+    },
+    firstProject: "First Project",
+    viewProject: "View Project",
+  },
   contact: {
     title: 'Contact Us',
     subtitle: 'We are ready to transform your idea into reality.',
@@ -73,6 +85,7 @@ export const en = {
       email: 'Email',
       message: 'Message',
       submit: 'Send Message',
+      sending: 'Sending...',
     },
     info: {
       title: 'Contact Information',
@@ -80,6 +93,11 @@ export const en = {
       email: 'Email',
       address: 'Address',
     },
+    notifications: {
+      success: 'Message sent successfully! We will contact you soon.',
+      error: 'An error occurred while sending your message. Please try again.'
+    },
+    badge: 'Contact us',
   },
   footer: {
     company: {

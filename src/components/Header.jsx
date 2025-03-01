@@ -11,7 +11,7 @@ const Header = () => {
   const menuItems = [
     { title: t.nav.home, to: 'home' },
     { title: t.nav.services, to: 'services' },
-    { title: t.nav.about, to: 'about' },
+    { title: t.nav.portfolio, to: 'portfolio' },
     { title: t.nav.contact, to: 'contact' },
   ];
 
