@@ -38,9 +38,9 @@ export const pt = {
       title: 'Desenvolvimento de Aplicações Web',
       description: 'Aplicações web robustas e escaláveis, com foco em usabilidade e performance para sua empresa.',
     },
-    software: {
-      title: 'Desenvolvimento de Software',
-      description: 'Soluções de software personalizadas para automatizar e otimizar os processos do seu negócio.',
+    ai: {
+      title: 'Automações com IA',
+      description: 'Soluções inteligentes para automatizar processos e aumentar a eficiência do seu negócio usando tecnologias de Inteligência Artificial.',
     },
   },
   about: {

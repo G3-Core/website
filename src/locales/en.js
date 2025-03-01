@@ -38,9 +38,9 @@ export const en = {
       title: 'Web Application Development',
       description: 'Robust and scalable web applications, focused on usability and performance for your company.',
     },
-    software: {
-      title: 'Software Development',
-      description: 'Custom software solutions to automate and optimize your business processes.',
+    ai: {
+      title: 'AI Automation',
+      description: 'Intelligent solutions to automate processes and increase your business efficiency using Artificial Intelligence technologies.',
     },
   },
   about: {

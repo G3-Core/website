@@ -1,8 +1,31 @@
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
+import { 
+  LightBulbIcon,
+  CheckBadgeIcon,
+  ShieldCheckIcon
+} from '@heroicons/react/24/outline';
 
 const Hero = () => {
   const { t } = useApp();
+
+  const values = [
+    {
+      icon: LightBulbIcon,
+      title: t.hero.values.innovation.title,
+      text: t.hero.values.innovation.text,
+    },
+    {
+      icon: CheckBadgeIcon,
+      title: t.hero.values.quality.title,
+      text: t.hero.values.quality.text,
+    },
+    {
+      icon: ShieldCheckIcon,
+      title: t.hero.values.ethics.title,
+      text: t.hero.values.ethics.text,
+    },
+  ];
 
   return (
     <section id="home" className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white dark:from-dark dark:to-dark-light">
@@ -56,21 +79,11 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20"
         >
-          {[
-            {
-              title: t.hero.values.innovation.title,
-              text: t.hero.values.innovation.text,
-            },
-            {
-              title: t.hero.values.quality.title,
-              text: t.hero.values.quality.text,
-            },
-            {
-              title: t.hero.values.ethics.title,
-              text: t.hero.values.ethics.text,
-            },
-          ].map((valor, index) => (
-            <div key={index} className="p-6 bg-white dark:bg-dark-light rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+          {values.map((valor, index) => (
+            <div key={index} className="p-6 bg-white dark:bg-dark-light rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group">
+              <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg p-3 text-white mb-4 group-hover:scale-110 transition-transform">
+                <valor.icon className="w-full h-full" />
+              </div>
               <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text mb-3">
                 {valor.title}
               </h3>

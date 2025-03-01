@@ -11,14 +11,23 @@ export default {
         'poppins': ['Poppins', 'sans-serif'],
       },
       colors: {
-        'primary': '#2563eb',
-        'secondary': '#7c3aed',
+        'primary': {
+          DEFAULT: '#12518d',
+          light: '#1a69b5',
+          dark: '#0c3b68',
+        },
+        'secondary': {
+          DEFAULT: '#2563eb',
+          light: '#3b82f6',
+          dark: '#1d4ed8',
+        },
         'dark': {
-          DEFAULT: '#111827',
-          light: '#1f2937',
+          DEFAULT: '#0f172a',
+          light: '#1e293b',
+          paper: '#1e293b',
           text: {
-            primary: '#f3f4f6',
-            secondary: '#d1d5db'
+            primary: '#f8fafc',
+            secondary: '#94a3b8'
           }
         }
       },

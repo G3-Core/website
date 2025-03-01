@@ -9,20 +9,20 @@ const ThemeLanguageToggle = () => {
       {/* Botão de Tema */}
       <button
         onClick={toggleTheme}
-        className="p-2 rounded-lg bg-gray-100 dark:bg-dark-paper hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-white/10 backdrop-blur-md dark:bg-dark-light/50 hover:bg-white/20 dark:hover:bg-dark-light/70 transition-colors"
         aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
       >
         {theme === 'light' ? (
-          <MoonIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+          <MoonIcon className="w-5 h-5 text-gray-900 dark:text-gray-100" />
         ) : (
-          <SunIcon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+          <SunIcon className="w-5 h-5 text-gray-900 dark:text-gray-100" />
         )}
       </button>
 
       {/* Botão de Idioma */}
       <button
         onClick={toggleLanguage}
-        className="flex items-center justify-center w-8 h-8 rounded-lg overflow-hidden hover:opacity-80 transition-opacity"
+        className="flex items-center justify-center w-10 h-7 rounded-lg overflow-hidden hover:opacity-80 transition-opacity"
         aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
       >
         <img
