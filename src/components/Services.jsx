@@ -14,29 +14,57 @@ const Services = () => {
       icon: GlobeAltIcon,
       title: t.services.web.title,
       description: t.services.web.description,
+      color: "from-blue-500 to-cyan-400",
+      darkColor: "dark:from-blue-600 dark:to-cyan-500",
+      shadowColor: "shadow-blue-500/20",
+      delay: 0,
     },
     {
       icon: CodeBracketIcon,
       title: t.services.app.title,
       description: t.services.app.description,
+      color: "from-purple-500 to-indigo-500",
+      darkColor: "dark:from-purple-600 dark:to-indigo-600",
+      shadowColor: "shadow-purple-500/20",
+      delay: 0.1,
     },
     {
       icon: SparklesIcon,
       title: t.services.ai.title,
       description: t.services.ai.description,
+      color: "from-primary to-secondary",
+      darkColor: "dark:from-primary-light dark:to-secondary-light",
+      shadowColor: "shadow-primary/20",
+      delay: 0.2,
     },
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-50 dark:bg-dark-light">
-      <div className="container">
+    <section id="services" className="py-24 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gray-50 dark:bg-dark-light z-0"></div>
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-dark to-transparent z-0"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-dark to-transparent z-0"></div>
+      
+      {/* Decorative elements */}
+      <div className="absolute left-0 top-1/4 w-1/3 h-1/3">
+        <div className="absolute w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full filter blur-3xl"></div>
+      </div>
+      <div className="absolute right-0 bottom-1/4 w-1/3 h-1/3">
+        <div className="absolute w-64 h-64 bg-secondary/5 dark:bg-secondary/10 rounded-full filter blur-3xl"></div>
+      </div>
+
+      <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
+          <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-primary-dark dark:text-primary-light bg-primary/10 dark:bg-primary/20 rounded-full">
+            {t.services.badge || "Nossos Serviços"}
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
             {t.services.title}
           </h2>
@@ -49,21 +77,47 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-white dark:bg-dark p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: service.delay }}
+              whileHover={{ 
+                y: -12,
+                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+                transition: { duration: 0.3 }
+              }}
+              className={`bg-white/90 dark:bg-dark-light/90 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 overflow-hidden relative group`}
             >
-              <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-lg p-3 text-white mb-6 group-hover:scale-110 transition-transform">
-                <service.icon className="w-full h-full" />
+              {/* Background gradient blob */}
+              <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br opacity-10 dark:opacity-20 rounded-full filter blur-2xl transition-all duration-300 group-hover:scale-150 group-hover:opacity-30 dark:group-hover:opacity-40 group-hover:rotate-45 z-0"></div>
+              
+              <div className="relative z-10">
+                <div className={`w-16 h-16 bg-gradient-to-r ${service.color} ${service.darkColor} rounded-2xl p-4 text-white mb-8 ${service.shadowColor} shadow-lg transform-gpu transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                  <service.icon className="w-full h-full" />
+                </div>
+                
+                <h3 className={`text-xl font-bold mb-4 bg-gradient-to-r ${service.color} text-transparent bg-clip-text`}>
+                  {service.title}
+                </h3>
+                
+                <p className="text-gray-600 dark:text-dark-text-secondary">
+                  {service.description}
+                </p>
+                
+                <motion.div 
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="mt-8"
+                >
+                  <a href="#contact" className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${service.color} text-transparent bg-clip-text group-hover:underline`}>
+                    {t.services.learnMore || "Saiba mais"}
+                    <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
+                </motion.div>
               </div>
-              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 dark:text-dark-text-secondary">
-                {service.description}
-              </p>
             </motion.div>
           ))}
         </div>
