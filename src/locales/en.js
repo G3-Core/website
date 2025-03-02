@@ -45,6 +45,7 @@ export const en = {
     },
   },
   about: {
+    badge: "Our Story",
     title: 'About Us',
     subtitle: 'Learn about our history and values that guide us in developing innovative solutions.',
     mission: {
@@ -52,6 +53,7 @@ export const en = {
       description: 'Transform ideas into innovative digital solutions, driving our clients\' success through technology.',
     },
     values: {
+      title: 'Our Values',
       innovation: {
         title: 'Innovation',
         description: 'We constantly seek new technologies and methodologies to offer the best solutions.',
@@ -65,6 +67,15 @@ export const en = {
         description: 'We maintain the highest ethical standards in all our interactions and projects.',
       },
     },
+    techEvolution: {
+      title: "Our Technological Evolution",
+      description: "We are not limited to outdated technologies. We use an arsenal of modern tools that ensure reduced delivery times and exceptional results.",
+      subdescription: "Our team masters the most modern and innovative ones, allowing us to develop complete and high-performance projects.",
+      advantage: "Our Competitive Advantage",
+      advantageDescription: "The combination of expertise in different technological generations allows us to create innovative solutions that are compatible with existing systems. We can gradually modernize complex infrastructures without disrupting operations.",
+      modern: "Modern Technologies",
+      legacy: "Legacy Technologies"
+    }
   },
   portfolio: {
     badge: "Our Portfolio",
@@ -76,6 +87,13 @@ export const en = {
     },
     firstProject: "First Project",
     viewProject: "View Project",
+    viewDetails: "View details",
+    videoUnavailable: "The project video is not available. Add an MP4 file to the project folder.",
+    vonicsystems: {
+      title: "Vonic Systems",
+      description: "Institutional website developed for Vonic Systems, a company specialized in technological solutions for the industrial sector.",
+      tags: ["React", "Tailwind CSS", "Framer Motion", "Responsive"]
+    }
   },
   contact: {
     title: 'Contact Us',

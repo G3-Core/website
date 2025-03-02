@@ -1,3 +1,4 @@
+import React, { Suspense, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
 import { 
@@ -5,9 +6,36 @@ import {
   CheckBadgeIcon,
   ShieldCheckIcon
 } from '@heroicons/react/24/outline';
+import TechScene from './3d/TechScene';
+import InteractiveParticleBackground from './visual/InteractiveParticleBackground';
+import AnimatedGradientOrbs from './visual/AnimatedGradientOrbs';
+import AnimatedTextHighlight from './visual/AnimatedTextHighlight';
 
 const Hero = () => {
   const { t } = useApp();
+  const [mounted, setMounted] = useState(false);
+  const [has3DError, setHas3DError] = useState(false);
+
+  // Montagem tardia para evitar problemas de SSR com Three.js
+  useEffect(() => {
+    setMounted(true);
+    
+    // Adicionar tratamento de erro global para problemas de Three.js
+    const handleError = (event) => {
+      const errorText = event.message || '';
+      // Verificar se o erro está relacionado ao Three.js ou React Three Fiber
+      if (errorText.includes('three') || errorText.includes('fiber') || errorText.includes('Cannot read properties')) {
+        console.error('Erro na cena 3D, carregando fallback:', event);
+        setHas3DError(true);
+      }
+    };
+    
+    window.addEventListener('error', handleError);
+    
+    return () => {
+      window.removeEventListener('error', handleError);
+    };
+  }, []);
 
   const values = [
     {
@@ -29,102 +57,127 @@ const Hero = () => {
 
   return (
     <section id="home" className="pt-32 pb-20 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white dark:from-dark dark:to-dark-light z-0"></div>
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-20 left-10 w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-10 right-10 w-80 h-80 bg-secondary/5 dark:bg-secondary/10 rounded-full filter blur-3xl"></div>
-      </div>
-      
-      <div className="container relative z-10">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <div className="inline-block px-3 py-1 mb-6 text-xs font-medium text-primary dark:text-primary-light bg-primary/10 dark:bg-primary/20 rounded-full">
-              {t.hero.badge || "Tecnologia inovadora"}
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              {t.hero.title}{' '}
-              <span className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-                {t.hero.highlight}
-              </span>
-            </h1>
-            <p className="text-gray-600 dark:text-dark-text-secondary text-lg mb-8">
-              {t.hero.description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.button 
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-gradient-to-r from-primary to-secondary hover:from-primary-light hover:to-secondary-light text-white rounded-xl font-medium transition-all duration-300 hover:shadow-lg shadow-primary/20"
-              >
-                {t.hero.cta}
-              </motion.button>
-              <motion.button 
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-8 py-4 bg-white dark:bg-dark-light border-2 border-primary text-primary dark:text-primary-light rounded-xl font-medium transition-all duration-300 hover:shadow-lg shadow-primary/10"
-              >
-                {t.hero.secondary}
-              </motion.button>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="relative"
-          >
-            <div className="relative z-10">
-              <img
-                src="/hero-image.svg"
-                alt="Web Development"
-                className="w-full h-auto"
-              />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl transform rotate-6 -z-10" />
-            <motion.div 
-              className="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/10 rounded-full filter blur-xl z-0"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.7, 0.9, 0.7] 
-              }} 
-              transition={{ 
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }} 
-            />
-          </motion.div>
+      {/* Novos elementos de background interativos */}
+        <div className="absolute inset-0 z-0">
+          <InteractiveParticleBackground 
+            particleCount={50}
+            colors={['#3b82f6', '#8b5cf6', '#ec4899']}
+            speed={1.5}
+            interactive={true}
+            minSize={2}
+            maxSize={6}
+          />
         </div>
-
-        {/* Valores da Empresa */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24"
-        >
-          {values.map((valor, index) => (
-            <motion.div 
-              key={index} 
-              whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
-              className="p-8 bg-white/80 dark:bg-dark-light/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl border border-gray-100 dark:border-dark-light transition-all duration-300 group"
+        
+        <div className="absolute inset-0 z-0 opacity-60">
+          <AnimatedGradientOrbs 
+            count={4}
+            colors={[
+          ['#3b82f6', '#60a5fa'],
+          ['#8b5cf6', '#a78bfa'],
+          ['#ec4899', '#f472b6'],
+          ['#06b6d4', '#67e8f9']
+            ]}
+            minOpacity={0.15}
+            maxOpacity={0.35}
+          />
+        </div>
+        
+        <div className="container relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <div className="w-14 h-14 bg-gradient-to-r from-primary to-secondary rounded-xl p-3 text-white mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-primary/20">
-                <valor.icon className="w-full h-full" />
+          <div className="inline-block px-3 py-1 mb-6 text-xs font-medium text-primary dark:text-neon-primary bg-primary/10 dark:bg-dark-bg-light/50 rounded-full backdrop-blur-sm dark:neon-text whitespace-nowrap">
+            {t.hero.badge || "Tecnologia inovadora"}
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            {t.hero.title}{' '}
+            <AnimatedTextHighlight 
+              text={t.hero.highlight}
+              duration={4}
+              colors={['#3b82f6', '#8b5cf6', '#ec4899']}
+            />
+          </h1>
+          <p className="text-lg md:text-xl text-gray-600 dark:text-dark-text-secondary mb-8 backdrop-blur-sm bg-white/20 dark:bg-dark-bg-light/20 p-4 rounded-xl">
+            {t.hero.description || t.hero.subtitle}
+          </p>
+          <div className="flex flex-wrap gap-4">
+            <motion.a
+              href="#contact"
+              className="btn-primary dark:bg-neon-primary dark:text-dark-bg dark:border-neon-primary dark:neon-border"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {t.hero.cta || t.hero.primaryButton}
+            </motion.a>
+           
+          </div>
+            </motion.div>
+            
+            <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="relative h-80 md:h-[500px] rounded-lg overflow-hidden dark:neon-border"
+            >
+          {mounted && !has3DError ? (
+            <Suspense fallback={
+              <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-dark-bg-light/10 rounded-lg">
+            <div className="animate-pulse text-primary dark:text-neon-primary dark:neon-pulse">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
               </div>
-              <h3 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text mb-4">
-                {valor.title}
-              </h3>
-              <p className="text-gray-600 dark:text-dark-text-secondary">
-                {valor.text}
-              </p>
+            }>
+              <TechScene />
+            </Suspense>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-dark-bg-light/10 rounded-lg">
+              {has3DError ? (
+            <div className="text-center p-6">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-primary dark:text-neon-primary dark:neon-text mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <p className="text-gray-600 dark:text-dark-text-secondary">{t.hero.tech3dError || "Visualização 3D não disponível"}</p>
+            </div>
+              ) : (
+            <div className="animate-pulse text-primary dark:text-neon-primary dark:neon-pulse">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </div>
+              )}
+            </div>
+          )}
+            </motion.div>
+          </div>
+
+          {/* Valores da empresa */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+          className="grid md:grid-cols-3 gap-6 mt-20"
+        >
+          {values.map((value, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ 
+                y: -5, 
+                boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.1)",
+                className: "dark:neon-border"
+              }}
+              className="bg-white dark:bg-dark-bg-light/20 rounded-lg p-6 shadow-md backdrop-blur-md bg-opacity-80 dark:bg-opacity-20 border border-transparent dark:border-dark-bg-light/30"
+            >
+              <div className="w-12 h-12 bg-primary/10 dark:bg-neon-primary/10 rounded-lg flex items-center justify-center mb-4">
+                <value.icon className="w-6 h-6 text-primary dark:text-neon-primary dark:neon-text" />
+              </div>
+              <h3 className="text-xl font-bold mb-2 dark:text-neon-primary dark:neon-text">{value.title}</h3>
+              <p className="text-gray-600 dark:text-dark-text-secondary">{value.text}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -132,5 +185,40 @@ const Hero = () => {
     </section>
   );
 };
+
+// Componente de fallback caso a cena 3D não carregue
+const FallbackImage = () => (
+  <div className="w-full h-full min-h-[400px] flex items-center justify-center">
+    <img
+      src="/hero-image.svg"
+      alt="Web Development"
+      className="w-full h-auto"
+    />
+  </div>
+);
+
+// Error Boundary para capturar erros no componente 3D
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Error na cena 3D:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
 
 export default Hero; 

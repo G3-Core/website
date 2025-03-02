@@ -15,7 +15,7 @@ const Services = () => {
       title: t.services.web.title,
       description: t.services.web.description,
       color: "from-blue-500 to-cyan-400",
-      darkColor: "dark:from-blue-600 dark:to-cyan-500",
+      darkColor: "dark:from-neon-primary dark:to-neon-secondary",
       shadowColor: "shadow-blue-500/20",
       delay: 0,
     },
@@ -23,9 +23,9 @@ const Services = () => {
       icon: CodeBracketIcon,
       title: t.services.app.title,
       description: t.services.app.description,
-      color: "from-purple-500 to-indigo-500",
-      darkColor: "dark:from-purple-600 dark:to-indigo-600",
-      shadowColor: "shadow-purple-500/20",
+      color: "from-blue-600 to-blue-400",
+      darkColor: "dark:from-neon-primary dark:to-neon-secondary",
+      shadowColor: "shadow-blue-500/20",
       delay: 0.1,
     },
     {
@@ -33,25 +33,25 @@ const Services = () => {
       title: t.services.ai.title,
       description: t.services.ai.description,
       color: "from-primary to-secondary",
-      darkColor: "dark:from-primary-light dark:to-secondary-light",
+      darkColor: "dark:from-neon-primary dark:to-neon-secondary",
       shadowColor: "shadow-primary/20",
       delay: 0.2,
     },
   ];
 
   return (
-    <section id="services" className="py-24 relative overflow-hidden">
+    <section id="services" className="py-24 relative overflow-hidden bg-gray-50 dark:bg-black">
       {/* Background */}
-      <div className="absolute inset-0 bg-gray-50 dark:bg-dark-light z-0"></div>
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-dark to-transparent z-0"></div>
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-dark to-transparent z-0"></div>
+      <div className="absolute inset-0 bg-gray-50 dark:bg-black z-0"></div>
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-black to-transparent z-0"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-black to-transparent z-0"></div>
       
       {/* Decorative elements */}
       <div className="absolute left-0 top-1/4 w-1/3 h-1/3">
-        <div className="absolute w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute w-64 h-64 bg-primary/5 dark:bg-neon-primary/5 rounded-full filter blur-3xl"></div>
       </div>
       <div className="absolute right-0 bottom-1/4 w-1/3 h-1/3">
-        <div className="absolute w-64 h-64 bg-secondary/5 dark:bg-secondary/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute w-64 h-64 bg-secondary/5 dark:bg-neon-secondary/5 rounded-full filter blur-3xl"></div>
       </div>
 
       <div className="container relative z-10">
@@ -62,10 +62,10 @@ const Services = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-primary-dark dark:text-primary-light bg-primary/10 dark:bg-primary/20 rounded-full">
+          <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-primary-dark dark:text-neon-primary bg-primary/10 dark:bg-neon-primary/10 rounded-full">
             {t.services.badge || "Nossos Serviços"}
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text">
             {t.services.title}
           </h2>
           <p className="text-gray-600 dark:text-dark-text-secondary max-w-2xl mx-auto">
@@ -86,17 +86,17 @@ const Services = () => {
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
                 transition: { duration: 0.3 }
               }}
-              className={`bg-white/90 dark:bg-dark-light/90 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800 transition-all duration-300 overflow-hidden relative group`}
+              className={`bg-white/90 dark:bg-black/50 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-neon-primary/30 transition-all duration-300 overflow-hidden relative group`}
             >
               {/* Background gradient blob */}
-              <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br opacity-10 dark:opacity-20 rounded-full filter blur-2xl transition-all duration-300 group-hover:scale-150 group-hover:opacity-30 dark:group-hover:opacity-40 group-hover:rotate-45 z-0"></div>
+              <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br opacity-10 dark:opacity-10 rounded-full filter blur-2xl transition-all duration-300 group-hover:scale-150 group-hover:opacity-30 dark:group-hover:opacity-20 group-hover:rotate-45 z-0"></div>
               
               <div className="relative z-10">
                 <div className={`w-16 h-16 bg-gradient-to-r ${service.color} ${service.darkColor} rounded-2xl p-4 text-white mb-8 ${service.shadowColor} shadow-lg transform-gpu transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
                   <service.icon className="w-full h-full" />
                 </div>
                 
-                <h3 className={`text-xl font-bold mb-4 bg-gradient-to-r ${service.color} text-transparent bg-clip-text`}>
+                <h3 className={`text-xl font-bold mb-4 bg-gradient-to-r ${service.color} text-transparent bg-clip-text dark:text-neon-primary`}>
                   {service.title}
                 </h3>
                 
@@ -110,7 +110,7 @@ const Services = () => {
                   transition={{ delay: 0.3 }}
                   className="mt-8"
                 >
-                  <a href="#contact" className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${service.color} text-transparent bg-clip-text group-hover:underline`}>
+                  <a href="#contact" className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${service.color} text-transparent bg-clip-text dark:text-neon-primary group-hover:underline`}>
                     {t.services.learnMore || "Saiba mais"}
                     <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />

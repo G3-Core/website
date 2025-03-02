@@ -45,6 +45,7 @@ export const pt = {
     },
   },
   about: {
+    badge: "Nossa História",
     title: 'Sobre Nós',
     subtitle: 'Conheça nossa história e valores que nos guiam no desenvolvimento de soluções inovadoras.',
     mission: {
@@ -52,6 +53,7 @@ export const pt = {
       description: 'Transformar ideias em soluções digitais inovadoras, impulsionando o sucesso dos nossos clientes através da tecnologia.',
     },
     values: {
+      title: 'Nossos Valores',
       innovation: {
         title: 'Inovação',
         description: 'Buscamos constantemente novas tecnologias e metodologias para oferecer as melhores soluções.',
@@ -65,17 +67,51 @@ export const pt = {
         description: 'Mantemos os mais altos padrões éticos em todas as nossas interações e projetos.',
       },
     },
+    techEvolution: {
+      title: "Nossa Evolução Tecnológica",
+      description: "Não nos limitamos a tecnologias ultrapassadas. Utilizamos um arsenal de ferramentas modernas que garantem prazos reduzidos e resultados excepcionais.",
+      subdescription: "Nossa equipe domina as tecnologias mais modernas e inovadoras, permitindo desenvolver projetos completos e performáticos.",
+      advantage: "Nossa Vantagem Competitiva",
+      advantageDescription: "A combinação de expertise em diferentes gerações tecnológicas nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes. Conseguimos modernizar gradualmente infraestruturas complexas sem interromper operações.",
+      modern: "Tecnologias Modernas",
+      legacy: "Tecnologias Legadas"
+    },
+    timeline: {
+      foundation: {
+        title: "Fundação",
+        description: "Início de nossa jornada tecnológica, focando em soluções inovadoras para empresas."
+      },
+      expansion: {
+        title: "Expansão",
+        description: "Crescimento significativo com novos clientes e desenvolvimento de novas tecnologias proprietárias."
+      },
+      innovation: {
+        title: "Inovação",
+        description: "Lançamento de nossa plataforma principal, oferecendo soluções de ponta em tecnologia de software."
+      },
+      present: {
+        title: "Presente",
+        description: "Atualmente, continuamos ampliando nossa presença global com foco em tecnologias emergentes."
+      }
+    }
   },
   portfolio: {
     badge: "Nosso Portfólio",
     title: "Projetos Recentes",
-    subtitle: "Conheça alguns dos projetos que desenvolvemos recentemente, demonstrando nossa expertise em desenvolvimento web.",
+    subtitle: "Explore alguns dos nossos projetos desenvolvidos recentemente que demonstram nossa expertise em desenvolvimento web.",
     comingSoon: {
       title: "Mais projetos em breve",
       description: "Estamos constantemente desenvolvendo novos projetos inovadores. Fique atento para mais atualizações em nosso portfólio."
     },
     firstProject: "Primeiro Projeto",
     viewProject: "Ver Projeto",
+    viewDetails: "Ver detalhes",
+    videoUnavailable: "O vídeo do projeto não está disponível. Adicione um arquivo MP4 na pasta do projeto.",
+    vonicsystems: {
+      title: "Vonic Systems",
+      description: "Website institucional desenvolvido para a Vonic Systems, uma empresa especializada em soluções tecnológicas para o setor industrial.",
+      tags: ["React", "Tailwind CSS", "Framer Motion", "Responsivo"]
+    }
   },
   contact: {
     title: 'Entre em Contato',

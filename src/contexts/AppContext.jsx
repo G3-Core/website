@@ -12,7 +12,7 @@ export const useApp = () => {
 };
 
 export const AppProvider = ({ children }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [language, setLanguage] = useState('pt');
 
   useEffect(() => {

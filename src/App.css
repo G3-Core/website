@@ -40,3 +40,218 @@
 .read-the-docs {
   color: #888;
 }
+
+:root {
+  --color-primary: #3b82f6;
+  --color-primary-light: #60a5fa;
+  --color-secondary: #104F89;
+  --color-secondary-light: #1E6BB8;
+  
+  /* Cores para o tema dark neon */
+  --color-dark-bg: #000000;
+  --color-dark-bg-light: #0A0A0A;
+  --color-dark-text-primary: #f0f0f0;
+  --color-dark-text-secondary: #a0a0a0;
+  --color-neon-primary: #00BFFF;
+  --color-neon-secondary: #104F89;
+  --color-neon-accent: #00BFFF;
+  --color-neon-glow: rgba(0, 191, 255, 0.6);
+  --color-neon-secondary-glow: rgba(16, 79, 137, 0.6);
+}
+
+/* Redefinições para tema dark */
+.dark {
+  --bg-color: var(--color-dark-bg);
+  --bg-color-light: var(--color-dark-bg-light);
+  --text-color: var(--color-dark-text-primary);
+  --text-color-secondary: var(--color-dark-text-secondary);
+  background-color: var(--color-dark-bg);
+}
+
+/* Efeitos neon para elementos destacados no tema dark */
+.dark .neon-text {
+  text-shadow: 0 0 5px var(--color-neon-glow), 0 0 10px var(--color-neon-glow);
+}
+
+.dark .neon-border {
+  box-shadow: 0 0 5px var(--color-neon-glow), 0 0 10px var(--color-neon-glow);
+  border-color: var(--color-neon-primary) !important;
+}
+
+.dark .neon-secondary {
+  text-shadow: 0 0 5px var(--color-neon-secondary-glow), 0 0 10px var(--color-neon-secondary-glow);
+  color: var(--color-neon-secondary);
+}
+
+/* Ajustes específicos para o tema dark */
+.dark .bg-dark {
+  background-color: var(--color-dark-bg) !important;
+}
+
+.dark .bg-dark-light {
+  background-color: var(--color-dark-bg-light) !important;
+}
+
+.dark .text-primary-light {
+  color: var(--color-neon-primary) !important;
+}
+
+.dark .text-secondary-light {
+  color: var(--color-neon-secondary) !important;
+}
+
+.dark .from-primary {
+  --tw-gradient-from: var(--color-neon-primary) !important;
+}
+
+.dark .to-secondary {
+  --tw-gradient-to: var(--color-neon-secondary) !important;
+}
+
+/* CORREÇÃO: Garantindo fundos uniformes para todas as seções */
+.dark section,
+.dark main,
+.dark body,
+.dark #root,
+.dark div,
+.dark header,
+.dark footer {
+  background-color: var(--color-dark-bg);
+}
+
+/* CORREÇÃO: Forçando a cor de fundo em todas as variações */
+.dark .bg-white,
+.dark .bg-white\/80,
+.dark .bg-white\/90,
+.dark .bg-white\/95,
+.dark .bg-gray-50,
+.dark .bg-gray-100,
+.dark .dark\:bg-dark,
+.dark .dark\:bg-dark\/90,
+.dark .dark\:bg-black\/95 {
+  background-color: var(--color-dark-bg) !important;
+}
+
+/* CORREÇÃO: Ajuste para cards e elementos de fundo */
+.dark .bg-dark-bg-light\/20,
+.dark .dark\:bg-dark-bg-light\/20,
+.dark .dark\:bg-dark-bg-light\/30,
+.dark .dark\:bg-dark-light\/80,
+.dark .dark\:bg-dark-light\/20,
+.dark .dark\:bg-black\/50,
+.dark .dark\:bg-dark\/80 {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 191, 255, 0.2);
+}
+
+/* CORREÇÃO: Botões e elementos interativos no tema escuro */
+.dark button,
+.dark .button,
+.dark [role="button"] {
+  border-color: var(--color-neon-primary);
+  border-width: 1px;
+  border-opacity: 0.5;
+}
+
+/* CORREÇÃO: Correções para bordas no tema escuro */
+.dark .border-gray-100,
+.dark .border-white\/10,
+.dark .border-white\/20,
+.dark .dark\:border-neon-primary\/20,
+.dark .dark\:border-neon-primary\/30 {
+  border-color: var(--color-neon-primary) !important;
+  border-width: 1px !important;
+  border-opacity: 0.3 !important;
+}
+
+/* CORREÇÃO: Header */
+.dark header.fixed {
+  background-color: black !important;
+  border-bottom: 1px solid var(--color-neon-primary);
+  border-opacity: 0.3;
+}
+
+/* CORREÇÃO: Container centralizado */
+.container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 1280px;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Permitir que o cursor nativo e o personalizado coexistam */
+@media (min-width: 768px) {
+  body {
+    cursor: auto; /* Mostra o cursor nativo em vez de ocultá-lo */
+  }
+  
+  a, button, [role="button"], [role="link"], .clickable {
+    cursor: pointer; /* Garantir que elementos clicáveis mostrem o ponteiro apropriado */
+  }
+}
+
+/* Configuração para dispositivos móveis */
+@media (max-width: 767px) {
+  body {
+    cursor: auto; /* Manter o cursor nativo em dispositivos móveis */
+  }
+}
+
+/* Animações para efeito neon pulsante */
+@keyframes neon-pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.dark .neon-pulse {
+  animation: neon-pulse 2s infinite;
+}
+
+/* Corrigindo problemas de wrap */
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Garantindo responsividade correta */
+@media (max-width: 768px) {
+  .container {
+    overflow-x: hidden;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
