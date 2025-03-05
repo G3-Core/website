@@ -142,6 +142,7 @@ const TechEvolutionScene = () => {
         <Scene />
       </Canvas>
     </div>
+    
   );
 };
 
