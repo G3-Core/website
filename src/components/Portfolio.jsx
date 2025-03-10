@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useApp } from '../contexts/AppContext';
 import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import vonicWebsiteVideo from '../../public/portfolio/vonic_systems_project.mp4'
 
 const Portfolio = () => {
   const { t } = useApp();
@@ -80,48 +81,57 @@ const Portfolio = () => {
               </div>
             </div> */}
 
-            {/* Imagem de fundo (com efeito de zoom suave no hover) */}            
+            {/* Imagem de fundo (com efeito de zoom suave no hover) */}
             <div className="relative aspect-[16/9] overflow-hidden">
               <motion.div
                 animate={{ scale: hovered ? 1.05 : 1 }}
                 transition={{ duration: 0.4 }}
                 className="w-full h-full"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/40 to-secondary/40 dark:from-neon-primary/40 dark:to-neon-secondary/40 mix-blend-overlay z-0"></div>
+                {/* This overlay now uses opacity to ensure visibility in both light and dark modes */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-secondary/60 dark:from-neon-primary/60 dark:to-neon-secondary/60 mix-blend-overlay z-0"></div>
+
+                {/* Make sure the video has proper dark mode visibility */}
                 <video
-                  src="/portfolio/vonic_systems_project.mp4"
-                  className="w-full h-full object-cover"
+                  src={vonicWebsiteVideo}
+                  className="w-full h-full object-cover dark:brightness-90" // Added dark:brightness-90 to improve visibility in dark mode
                   autoPlay
                   loop
                   muted
                   playsInline
                   onError={(e) => {
-                    // Fallback para caso o vídeo não exista
-                    console.log("⚠️ Adicione um vídeo em /public/portfolio/vonic_systems_project.mp4 para uma experiência mais rica");
-                    e.target.outerHTML = `
-                      <div class="relative w-full h-full">
-                        <img 
-                          src="https://placehold.co/1200x675/22222A/FFFFFF?text=Vonic+Systems&font=poppins" 
-                          alt="Vonic Systems - Placeholder"
-                          class="w-full h-full object-cover" 
-                        />
-                        <div class="absolute inset-0 flex items-center justify-center">
-                          <div class="bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 rounded-xl text-center max-w-md shadow-xl">
-                            <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                              ${t.portfolio.videoUnavailable}
-                            </p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">
-                              Path: /public/portfolio/vonic_systems_project.mp4
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    `;
+                    // Improved fallback that works in both light and dark mode
+                    const target = e.target;
+                    const container = target.parentNode;
+
+                    // Create fallback element
+                    const fallbackDiv = document.createElement('div');
+                    fallbackDiv.className = "relative w-full h-full";
+                    fallbackDiv.innerHTML = `
+          <img 
+            src="https://placehold.co/1200x675/22222A/FFFFFF?text=Vonic+Systems&font=poppins" 
+            alt="Vonic Systems - Placeholder"
+            class="w-full h-full object-cover" 
+          />
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="bg-white/90 dark:bg-black/90 backdrop-blur-md px-6 py-4 rounded-xl text-center max-w-md shadow-xl">
+              <p class="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                ${t.portfolio.videoUnavailable}
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                Path: /public/portfolio/vonic_systems_project.mp4
+              </p>
+            </div>
+          </div>
+        `;
+
+                    // Replace video with fallback
+                    container.replaceChild(fallbackDiv, target);
                   }}
                 />
               </motion.div>
 
-              {/* Botão de link */}
+              {/* Botão de link - made more visible in dark mode */}
               <motion.a
                 href={project.link}
                 target="_blank"
@@ -130,8 +140,9 @@ const Portfolio = () => {
                 animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.8 }}
                 transition={{ duration: 0.2 }}
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20
-                  bg-white/90 dark:bg-black/90 backdrop-blur-sm p-4 rounded-full shadow-xl
-                  text-primary dark:text-neon-primary hover:text-primary-light dark:hover:text-neon-primary transition-colors duration-300 dark:border dark:border-neon-primary/30"
+      bg-white/90 dark:bg-black/90 backdrop-blur-sm p-4 rounded-full shadow-xl
+      text-primary dark:text-neon-primary hover:text-primary-light dark:hover:text-neon-primary 
+      transition-colors duration-300 dark:border dark:border-neon-primary/50 dark:hover:border-neon-primary"
                 aria-label={t.portfolio.viewProject}
               >
                 <ArrowTopRightOnSquareIcon className="w-8 h-8" />

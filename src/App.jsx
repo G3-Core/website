@@ -7,7 +7,6 @@ import About from './components/About'
 import Portfolio from './components/Portfolio'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import ThemeLanguageToggle from './components/ThemeLanguageToggle'
 import { motion, AnimatePresence } from 'framer-motion';
 
 import './App.css';

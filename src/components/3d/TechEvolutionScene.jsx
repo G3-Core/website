@@ -121,15 +121,13 @@ const TechCluster = ({ technologies, isModern }) => {
 };
 
 const Scene = () => {
-  const modernTechs = ["React", "Node.js", "TypeScript", "Next.js", "Three.js", "Tailwind CSS", "Material UI"];
-  const legacyTechs = ["PHP", "MySQL", "WordPress"];
+  const modernTechs = ["React", "Node.js", "TypeScript", "Next.js", "Three.js", "Tailwind CSS", "Material UI", "Firebase", "MongoDB", "MySQL", "WordPress"];
   
   return (
     <>
       <ambientLight intensity={0.5} />
       <pointLight position={[10, 10, 10]} intensity={1} />
       <TechCluster technologies={modernTechs} isModern={true} />
-      <TechCluster technologies={legacyTechs} isModern={false} />
       <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 4} maxPolarAngle={Math.PI / 2} />
     </>
   );

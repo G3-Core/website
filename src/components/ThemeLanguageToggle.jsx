@@ -1,5 +1,6 @@
 import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 import { useApp } from '../contexts/AppContext';
+import ReactCountryFlag from 'react-country-flag';
 
 const ThemeLanguageToggle = () => {
   const { theme, toggleTheme, language, toggleLanguage } = useApp();
@@ -19,20 +20,25 @@ const ThemeLanguageToggle = () => {
         )}
       </button>
 
-      {/* Botão de Idioma */}
+      {/* Botão de Idioma com ReactCountryFlag */}
       <button
         onClick={toggleLanguage}
         className="flex items-center justify-center w-10 h-7 rounded-lg overflow-hidden hover:opacity-80 transition-opacity border dark:border-neon-primary dark:shadow-[0_0_10px_rgba(0,191,255,0.3)]"
         aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
       >
-        <img
-          src={language === 'en' ? '/us-flag.svg' : '/br-flag.svg'}
-          alt={language === 'en' ? 'English' : 'Português'}
-          className="w-full h-full object-cover"
+        <ReactCountryFlag
+          countryCode={language === 'en' ? 'US' : 'BR'}
+          svg
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+          title={language === 'en' ? 'English' : 'Português'}
         />
       </button>
     </div>
   );
 };
 
-export default ThemeLanguageToggle; 
+export default ThemeLanguageToggle;
