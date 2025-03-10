@@ -28,6 +28,18 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <motion.header
@@ -35,9 +47,9 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'py-3 bg-white/80 dark:bg-black/80 shadow-lg backdrop-blur-lg'
-          : 'py-5 bg-transparent'
+        isScrolled || mobileMenuOpen
+          ? 'py-3 bg-white/80 dark:bg-black/80 '
+          : 'py-5'
       }`}
     >
       <div className="container flex justify-between items-center">
@@ -69,7 +81,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-black/70 transition-colors duration-300 border dark:border-neon-primary/50"
+            className="md:hidden p-2 rounded-lg text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-black/70 transition-colors duration-300 border dark:border-neon-primary/50 z-50"
           >
             {mobileMenuOpen ? (
               <XMarkIcon className="w-6 h-6" />
@@ -80,17 +92,31 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/50 dark:bg-black/70  z-40 md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden"
+            className="absolute top-full left-0 right-0 z-40 md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-xl border-t border-gray-200 dark:border-neon-primary/20"
           >
-            <div className="container py-4 mt-2">
+            <div className="container py-4">
               <nav className="flex flex-col space-y-1">
                 {menuItems.map((item, index) => (
                   <Link

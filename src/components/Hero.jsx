@@ -4,7 +4,8 @@ import { useApp } from '../contexts/AppContext';
 import { 
   LightBulbIcon,
   CheckBadgeIcon,
-  ShieldCheckIcon
+  ShieldCheckIcon,
+  StarIcon
 } from '@heroicons/react/24/outline';
 import TechScene from './3d/TechScene';
 import InteractiveParticleBackground from './visual/InteractiveParticleBackground';
@@ -93,14 +94,21 @@ const Hero = () => {
           <div className="inline-block px-3 py-1 mb-6 text-xs font-medium text-primary dark:text-neon-primary bg-primary/10 dark:bg-dark-bg-light/50 rounded-full backdrop-blur-sm dark:neon-text whitespace-nowrap">
             {t.hero.badge || "Tecnologia inovadora"}
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            {t.hero.title}{' '}
-            <AnimatedTextHighlight 
-              text={t.hero.highlight}
-              duration={4}
-              colors={['#3b82f6', '#8b5cf6', '#ec4899']}
-            />
-          </h1>
+          <div className="bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text">
+            <h1 className="mb-4 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight md:leading-tight lg:leading-tight">
+              <div className="flex items-center">
+                <StarIcon className="flex-shrink-0 w-10 h-10 mr-2 text-primary dark:text-neon-primary" />
+                <span>
+                  {t.hero.title}{' '}
+                  <AnimatedTextHighlight 
+                    text={t.hero.highlight}
+                    duration={4}
+                    colors={['#3b82f6', '#8b5cf6', '#ec4899']}
+                  />
+                </span>
+              </div>
+            </h1>
+          </div>
           <p className="text-lg md:text-xl text-gray-600 dark:text-dark-text-secondary mb-8 backdrop-blur-sm bg-white/20 dark:bg-dark-bg-light/20 p-4 rounded-xl">
             {t.hero.description || t.hero.subtitle}
           </p>

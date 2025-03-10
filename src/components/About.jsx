@@ -3,10 +3,12 @@ import { useApp } from '../contexts/AppContext';
 import { 
   LightBulbIcon, 
   UserGroupIcon, 
-  ShieldCheckIcon
+  ShieldCheckIcon,
+  InformationCircleIcon
 } from '@heroicons/react/24/outline';
 import AnimatedGradientOrbs from './visual/AnimatedGradientOrbs';
-import TechEvolutionScene from './3d/TechEvolutionScene';
+import TechStackGrid from './visual/TechStackGrid';
+import ValuesPillars from './visual/ValuesPillars';
 
 const About = () => {
   const { t } = useApp();
@@ -62,51 +64,18 @@ const About = () => {
             {t.about.badge || "Nossa História"}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text">
-            {t.about.title}
+            <span className="inline-flex items-center">
+              <InformationCircleIcon className="w-10 h-10 mr-2 text-primary dark:text-neon-primary" />
+              {t.about.title}
+            </span>
           </h2>
           <p className="text-gray-600 dark:text-white max-w-2xl mx-auto">
             {t.about.subtitle}
           </p>
         </motion.div>
 
-        {/* Seção Valores */}
+        {/* Seção de Stack Tecnológica (substituindo a Evolução Tecnológica) */}
         <div className="mb-24">
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-2xl font-bold mb-12 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text"
-          >
-            {t.about.values.title || "Nossos Valores"}
-          </motion.h3>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="bg-white/80 dark:bg-black/50 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-neon-primary/30 flex flex-col items-center text-center"
-              >
-                <div className="p-4 rounded-xl bg-primary/10 dark:bg-black/70 dark:border dark:border-neon-primary/30 mb-6">
-                  <value.icon className="w-8 h-8 text-primary dark:text-neon-primary" />
-                </div>
-                <h4 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text nowrap">
-                  {value.title}
-                </h4>
-                <p className="text-gray-600 dark:text-white">
-                  {value.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Seção de Evolução Tecnológica com visualização 3D */}
-        <div className="mb-10">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -114,7 +83,7 @@ const About = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-2xl font-bold mb-6 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text"
           >
-            {t.about.techEvolution?.title || "Nossa Evolução Tecnológica"}
+            {t.about.techEvolution?.title || "Nossa Stack Tecnológica"}
           </motion.h3>
 
           <motion.div
@@ -125,10 +94,10 @@ const About = () => {
             className="max-w-4xl mx-auto mb-8 text-center"
           >
             <p className="text-gray-700 dark:text-white text-lg mb-2">
-              {t.about.techEvolution?.description || "Não nos limitamos a tecnologias ultrapassadas. Utilizamos um arsenal de ferramentas modernas que garantem prazos reduzidos e resultados excepcionais."}
+              {t.about.techEvolution?.description || "Utilizamos um arsenal de ferramentas modernas que garantem prazos reduzidos e resultados excepcionais."}
             </p>
             <p className="text-gray-600 dark:text-gray-300 text-base">
-              {t.about.techEvolution?.subdescription || "Nossa equipe domina tanto tecnologias legadas (abaixo) quanto as mais modernas e inovadoras (acima), permitindo desenvolver projetos completos e performáticos."}
+              {t.about.techEvolution?.subdescription || "Nossa equipe domina tecnologias que permitem desenvolver projetos completos, modernos e performáticos."}
             </p>
           </motion.div>
 
@@ -137,9 +106,9 @@ const About = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full"
+            className="w-full bg-white/30 dark:bg-black/50 backdrop-blur-sm p-6 md:p-10 rounded-2xl shadow-lg border border-gray-100 dark:border-neon-primary/20"
           >
-            <TechEvolutionScene />
+            <TechStackGrid />
           </motion.div>
 
           <motion.div
@@ -153,9 +122,26 @@ const About = () => {
               {t.about.techEvolution?.advantage || "Nossa Vantagem Competitiva"}
             </h4>
             <p className="text-gray-700 dark:text-white">
-              {t.about.techEvolution?.advantageDescription || "A combinação de expertise em diferentes gerações tecnológicas nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes. Conseguimos modernizar gradualmente infraestruturas complexas sem interromper operações."}
+              {t.about.techEvolution?.advantageDescription || "A combinação de expertise em diferentes tecnologias nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes. Conseguimos modernizar gradualmente infraestruturas complexas sem interromper operações."}
             </p>
           </motion.div>
+        </div>
+
+        {/* Seção Nossos Valores (agora após a Stack Tecnológica) */}
+        <div className="mb-10">
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-2xl font-bold mb-12 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text"
+          >
+            {t.about.values.title || "Nossos Valores"}
+          </motion.h3>
+
+          <div className="max-w-4xl mx-auto bg-white/30 dark:bg-black/50 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 dark:border-neon-primary/20 overflow-hidden">
+            <ValuesPillars values={values} />
+          </div>
         </div>
       </div>
     </section>

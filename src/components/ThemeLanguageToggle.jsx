@@ -8,7 +8,7 @@ const ThemeLanguageToggle = () => {
   return (
     <div className="flex items-center space-x-4">
       {/* Botão de Tema */}
-      <button
+      {/* <button
         onClick={toggleTheme}
         className="p-2 rounded-lg bg-white/10 backdrop-blur-md dark:bg-black border dark:border-neon-primary hover:bg-white/20 dark:hover:bg-black/80 transition-colors"
         aria-label={theme === 'light' ? 'Ativar modo escuro' : 'Ativar modo claro'}
@@ -18,7 +18,7 @@ const ThemeLanguageToggle = () => {
         ) : (
           <SunIcon className="w-5 h-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]" />
         )}
-      </button>
+      </button> */}
 
       {/* Botão de Idioma com ReactCountryFlag */}
       <button

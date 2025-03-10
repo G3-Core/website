@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { useForm } from '@formspree/react';
-import { EnvelopeIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { FaWhatsapp, FaLinkedinIn } from 'react-icons/fa';
 import { useApp } from '../contexts/AppContext';
 import Confetti from 'react-confetti';
@@ -198,8 +198,11 @@ const Contact = () => {
           <div className="inline-block px-3 py-1 mb-4 text-xs font-medium text-primary dark:text-primary-light bg-primary/10 dark:bg-primary/20 rounded-full">
             {t.contact.badge || "Entre em contato"}
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
-            {t.contact.title}
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text">
+            <span className="inline-flex items-center">
+              <EnvelopeIcon className="w-10 h-10 mr-2 text-primary dark:text-neon-primary" />
+              {t?.contact?.title || "Entre em Contato"}
+            </span>
           </h2>
           <p className="text-gray-600 dark:text-dark-text-secondary max-w-2xl mx-auto">
             {t.contact.subtitle}

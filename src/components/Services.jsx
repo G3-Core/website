@@ -3,7 +3,8 @@ import { useApp } from '../contexts/AppContext';
 import { 
   CodeBracketIcon, 
   GlobeAltIcon, 
-  SparklesIcon 
+  SparklesIcon,
+  WrenchScrewdriverIcon
 } from '@heroicons/react/24/outline';
 
 const Services = () => {
@@ -66,7 +67,10 @@ const Services = () => {
             {t.services.badge || "Nossos Serviços"}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text">
-            {t.services.title}
+            <span className="inline-flex items-center">
+              <WrenchScrewdriverIcon className="w-10 h-10 mr-2 text-primary dark:text-neon-primary" />
+              {t.services.title}
+            </span>
           </h2>
           <p className="text-gray-600 dark:text-dark-text-secondary max-w-2xl mx-auto">
             {t.services.subtitle}
