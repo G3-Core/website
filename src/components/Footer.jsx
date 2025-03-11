@@ -1,23 +1,30 @@
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
-import { FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import { FaLinkedinIn, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import logo from '../assets/G3_logo.png';
+import { MdEmail } from 'react-icons/md';
 
 const Footer = () => {
   const { t } = useApp();
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
+    // {
+    //   name: 'LinkedIn',
+    //   url: 'https://linkedin.com/company/g3tech',
+    //   icon: FaLinkedinIn,
+    //   color: 'hover:bg-gradient-to-r hover:from-[#104F89] hover:via-[#00BFFF] hover:to-[#104F89]',
+    // },
     {
-      name: 'LinkedIn',
-      url: 'https://linkedin.com/company/g3tech',
-      icon: FaLinkedinIn,
-      color: 'hover:bg-[#0A66C2]',
+      name: 'Email',
+      url: 'mailto:g3tech2025@gmail.com',
+      icon: MdEmail,
+      color: 'hover:bg-gradient-to-r hover:from-[#104F89] hover:via-[#00BFFF] hover:to-[#104F89]',
     },
     {
-      name: 'Instagram',
-      url: 'https://instagram.com/g3tech',
-      icon: FaInstagram,
+      name: 'WhatsApp',
+      url: 'https://wa.me/5515996955275',
+      icon: FaWhatsapp,
       color: 'hover:bg-gradient-to-r hover:from-[#104F89] hover:via-[#00BFFF] hover:to-[#104F89]',
     },
   ];
@@ -26,9 +33,9 @@ const Footer = () => {
     <footer className="relative mt-20 overflow-hidden">
       {/* Background shape - adaptado para tema claro/escuro */}
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white dark:from-black to-transparent z-0"></div>
-      
+
       <div className="absolute top-0 inset-x-0 h-20 bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-neon-primary/5 dark:to-neon-secondary/5 transform -skew-y-3"></div>
-      
+
       {/* Alterado para usar cores claras no tema claro */}
       <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white pt-24 pb-12 relative">
         {/* Decorative elements */}
@@ -37,17 +44,19 @@ const Footer = () => {
           <div className="absolute top-1/3 right-0 w-80 h-80 bg-secondary rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-gradient-to-r from-primary to-secondary rounded-full filter blur-3xl opacity-70"></div>
         </div>
-        
+
         <div className="container max-w-6xl mx-auto px-4 relative z-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="bg-white/80 dark:bg-white/5 backdrop-blur-sm rounded-2xl p-8 md:p-10 border border-gray-200 dark:border-white/10 shadow-xl mb-12"
           >
+            {/* Grid Layout with 3 equal sections */}
             <div className="grid md:grid-cols-3 gap-12 md:gap-8">
-              <div className="flex flex-col items-center md:items-start">
+              {/* Company Section */}
+              <div className="flex flex-col items-center justify-center md:items-start md:justify-start">
                 <div className="flex items-center mb-6">
                   <img src={logo} alt="G3 Tech Logo" className="h-10 w-auto mr-2" />
                   <h3 className="text-xl font-bold text-primary dark:bg-gradient-to-r dark:from-neon-primary dark:to-neon-secondary dark:text-transparent dark:bg-clip-text">
@@ -59,7 +68,8 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center md:items-start">
+              {/* Contact Section */}
+              <div className="flex flex-col items-center justify-center md:items-start md:justify-start">
                 <h3 className="text-xl font-bold mb-6 text-primary dark:bg-gradient-to-r dark:from-neon-primary dark:to-neon-secondary dark:text-transparent dark:bg-clip-text">
                   {t.footer.contact.title}
                 </h3>
@@ -76,7 +86,8 @@ const Footer = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center md:items-start">
+              {/* Social Links Section */}
+              <div className="flex flex-col items-center justify-center md:items-start md:justify-start">
                 <h3 className="text-xl font-bold mb-6 text-primary dark:bg-gradient-to-r dark:from-neon-primary dark:to-neon-secondary dark:text-transparent dark:bg-clip-text">
                   {t.footer.social.title}
                 </h3>
@@ -101,7 +112,7 @@ const Footer = () => {
 
           <div className="text-center">
             <div className="w-full max-w-2xl mx-auto h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-500/30 to-transparent mb-8"></div>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -114,6 +125,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+
   );
 };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../../contexts/AppContext';
 import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaPhp, FaWordpress } from 'react-icons/fa';
@@ -46,19 +46,21 @@ const TechStackGrid = () => {
     'CSS3': <FaCss3Alt className="w-10 h-10 text-gray-900 dark:text-white" />,
   };
 
-  // Exemplo de descrições das tecnologias - podem ser fornecidas pelo contexto t
   const techDescriptions = {
-    'React': 'Biblioteca JavaScript para construção de interfaces modernas e reativas.',
-    'Node.js': 'Ambiente de execução JavaScript server-side para aplicações escaláveis.',
-    'TypeScript': 'Superset de JavaScript com tipagem estática para código mais robusto.',
-    'Next.js': 'Framework React para aplicações web completas com SSR e SSG.',
-    'Three.js': 'Biblioteca para criação de gráficos 3D no navegador utilizando WebGL.',
-    'Tailwind CSS': 'Framework CSS utilitário para design flexível e responsivo.',
-    'Material UI': 'Biblioteca de componentes React com visual Material Design.',
-    'Firebase': 'Plataforma de desenvolvimento com diversas soluções backend.',
-    'MongoDB': 'Banco de dados NoSQL orientado a documentos.',
-    'MySQL': 'Sistema de gerenciamento de banco de dados relacional.',
-    'WordPress': 'CMS popular para criação e gerenciamento de conteúdo web.',
+    'React': t.about.techEvolution.grid.react,
+    'Node.js': t.about.techEvolution.grid.nodejs,
+    'TypeScript': t.about.techEvolution.grid.typescript,
+    'Next.js': t.about.techEvolution.grid.nextjs,
+    'Three.js': t.about.techEvolution.grid.threejs,
+    'Tailwind CSS': t.about.techEvolution.grid.tailwindcss,
+    'Material UI': t.about.techEvolution.grid.materialui,
+    'Firebase': t.about.techEvolution.grid.firebase,
+    'MongoDB': t.about.techEvolution.grid.mongodb,
+    'MySQL': t.about.techEvolution.grid.mysql,
+    'WordPress': t.about.techEvolution.grid.wordpress,
+    'JavaScript': t.about.techEvolution.grid.javascript,
+    'HTML5': t.about.techEvolution.grid.html5,
+    'CSS3': t.about.techEvolution.grid.css3
   };
   
   // Categorias das tecnologias
@@ -93,28 +95,43 @@ const TechStackGrid = () => {
 
   // Componente para cada card de tecnologia
   const TechCard = ({ name, icon, description }) => {
-    const [isHovered, setIsHovered] = useState(false);
+    const [isActive, setIsActive] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+      const checkMobile = () => {
+        setIsMobile(window.innerWidth < 768);
+      };
+      
+      checkMobile();
+      window.addEventListener('resize', checkMobile);
+      
+      return () => window.removeEventListener('resize', checkMobile);
+    }, []);
     
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        whileHover={{ 
+        whileHover={!isMobile ? { 
           scale: 1.05,
           boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
           y: -5
-        }}
+        } : {}}
         transition={{ duration: 0.3 }}
-        className="bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-neon-primary/30 p-5 flex flex-col items-center overflow-hidden"
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
+        className={`bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-neon-primary/30 p-5 flex flex-col items-center overflow-hidden cursor-pointer ${
+          isActive ? 'ring-2 ring-primary dark:ring-neon-primary' : ''
+        }`}
+        onHoverStart={() => !isMobile && setIsActive(true)}
+        onHoverEnd={() => !isMobile && setIsActive(false)}
+        onClick={() => isMobile && setIsActive(!isActive)}
       >
         <div className="relative w-16 h-16 mb-4 flex items-center justify-center text-gray-900 dark:text-white">
          {icon}
           <motion.div 
             className="absolute inset-0 rounded-full bg-primary/10 dark:bg-neon-primary/10"
             initial={{ scale: 0 }}
-            animate={{ scale: isHovered ? 1.2 : 1 }}
+            animate={{ scale: isActive ? 1.2 : 1 }}
             transition={{ duration: 0.5 }}
           />
         </div>
@@ -128,8 +145,8 @@ const TechStackGrid = () => {
             className="text-gray-600 dark:text-gray-300 text-center text-sm"
             initial={{ opacity: 0, height: 0 }}
             animate={{ 
-              opacity: isHovered ? 1 : 0,
-              height: isHovered ? 'auto' : 0
+              opacity: isActive ? 1 : 0,
+              height: isActive ? 'auto' : 0
             }}
             transition={{ duration: 0.3 }}
           >

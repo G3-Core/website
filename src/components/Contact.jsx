@@ -128,15 +128,15 @@ const Contact = () => {
       hoverScale: 'group-hover:scale-110',
       delay: 0.1,
     },
-    {
-      icon: FaLinkedinIn,
-      text: 'LinkedIn',
-      subtext: '@g3tech',
-      href: 'https://linkedin.com/company/g3tech',
-      bgColor: 'bg-[#0A66C2]',
-      hoverScale: 'group-hover:scale-110',
-      delay: 0.2,
-    },
+    // {
+    //   icon: FaLinkedinIn,
+    //   text: 'LinkedIn',
+    //   subtext: '@g3tech',
+    //   href: 'https://linkedin.com/company/g3tech',
+    //   bgColor: 'bg-[#0A66C2]',
+    //   hoverScale: 'group-hover:scale-110',
+    //   delay: 0.2,
+    // },
   ];
 
   return (
@@ -215,7 +215,7 @@ const Contact = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
           >
             {contactButtons.map((button, index) => (
               <motion.a

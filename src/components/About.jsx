@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
-import { 
-  LightBulbIcon, 
-  UserGroupIcon, 
+import {
+  LightBulbIcon,
+  UserGroupIcon,
   ShieldCheckIcon,
-  InformationCircleIcon
+  InformationCircleIcon,
+  ScaleIcon
 } from '@heroicons/react/24/outline';
 import AnimatedGradientOrbs from './visual/AnimatedGradientOrbs';
 import TechStackGrid from './visual/TechStackGrid';
@@ -35,10 +36,10 @@ const About = () => {
     <section id="about" className="py-20 relative overflow-hidden bg-white dark:bg-black">
       {/* Background com gradientes sutis */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-blue-50/50 dark:from-black dark:via-black dark:to-black z-0"></div>
-      
+
       {/* Orbes de gradiente */}
       <div className="absolute inset-0 z-0 opacity-30">
-        <AnimatedGradientOrbs 
+        <AnimatedGradientOrbs
           count={3}
           colors={[
             ['#3b82f6', '#93c5fd'],
@@ -51,7 +52,7 @@ const About = () => {
           maxSize={450}
         />
       </div>
-      
+
       <div className="container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -74,7 +75,7 @@ const About = () => {
           </p>
         </motion.div>
 
-        {/* Seção de Stack Tecnológica (substituindo a Evolução Tecnológica) */}
+        {/* Seção de Stack Tecnológica */}
         <div className="mb-24">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
@@ -91,9 +92,9 @@ const About = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto mb-8 text-center"
+            className="max-w-4xl mx-auto mb-12 text-center space-y-4"
           >
-            <p className="text-gray-700 dark:text-white text-lg mb-2">
+            <p className="text-gray-700 dark:text-white text-lg">
               {t.about.techEvolution?.description || "Utilizamos um arsenal de ferramentas modernas que garantem prazos reduzidos e resultados excepcionais."}
             </p>
             <p className="text-gray-600 dark:text-gray-300 text-base">
@@ -106,41 +107,51 @@ const About = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full bg-white/30 dark:bg-black/50 backdrop-blur-sm p-6 md:p-10 rounded-2xl shadow-lg border border-gray-100 dark:border-neon-primary/20"
+            className="relative"
           >
-            <TechStackGrid />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-neon-primary/5 dark:to-neon-secondary/5 rounded-2xl transform -rotate-1"></div>
+            <div className="relative bg-white/50 dark:bg-black/30 backdrop-blur-sm p-6 md:p-10 rounded-2xl">
+              <TechStackGrid />
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="max-w-4xl mx-auto mt-10 p-6 bg-white/80 dark:bg-black/50 backdrop-blur-sm rounded-xl border border-gray-100 dark:border-neon-primary/30 shadow-lg"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="max-w-4xl mx-auto mt-16 space-y-6 p-6 bg-white/80 dark:bg-black/40 rounded-2xl shadow-lg"
           >
-            <h4 className="text-xl font-bold mb-3 bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text">
+            <h4 className="text-2xl font-extrabold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary">
               {t.about.techEvolution?.advantage || "Nossa Vantagem Competitiva"}
             </h4>
-            <p className="text-gray-700 dark:text-white">
-              {t.about.techEvolution?.advantageDescription || "A combinação de expertise em diferentes tecnologias nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes. Conseguimos modernizar gradualmente infraestruturas complexas sem interromper operações."}
+            <p className="text-lg text-gray-800 dark:text-gray-300 leading-relaxed">
+              {t.about.techEvolution?.advantageDescription ||
+                "A combinação de expertise em diferentes tecnologias nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes. Conseguimos modernizar gradualmente infraestruturas complexas sem interromper operações."}
             </p>
           </motion.div>
+
         </div>
 
-        {/* Seção Nossos Valores (agora após a Stack Tecnológica) */}
+        {/* Seção Nossos Valores */}
         <div className="mb-10">
           <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-2xl font-bold mb-12 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text"
+            className="text-2xl font-bold mb-12 text-center bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text dark:from-neon-primary dark:to-neon-secondary dark:neon-text flex items-center justify-center gap-3"
           >
+            <ScaleIcon className="w-8 h-8 text-primary dark:text-neon-primary" />
             {t.about.values.title || "Nossos Valores"}
           </motion.h3>
 
-          <div className="max-w-4xl mx-auto bg-white/30 dark:bg-black/50 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 dark:border-neon-primary/20 overflow-hidden">
-            <ValuesPillars values={values} />
+
+          <div className="relative max-w-4xl mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-neon-primary/5 dark:to-neon-secondary/5 rounded-2xl transform rotate-1"></div>
+            <div className="relative bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden">
+              <ValuesPillars values={values} />
+            </div>
           </div>
         </div>
       </div>

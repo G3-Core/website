@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
-import { 
-  CodeBracketIcon, 
-  GlobeAltIcon, 
+import {
+  CodeBracketIcon,
+  GlobeAltIcon,
   SparklesIcon,
   WrenchScrewdriverIcon
 } from '@heroicons/react/24/outline';
@@ -46,7 +46,7 @@ const Services = () => {
       <div className="absolute inset-0 bg-gray-50 dark:bg-black z-0"></div>
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white dark:from-black to-transparent z-0"></div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white dark:from-black to-transparent z-0"></div>
-      
+
       {/* Decorative elements */}
       <div className="absolute left-0 top-1/4 w-1/3 h-1/3">
         <div className="absolute w-64 h-64 bg-primary/5 dark:bg-neon-primary/5 rounded-full filter blur-3xl"></div>
@@ -85,7 +85,7 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: service.delay }}
-              whileHover={{ 
+              whileHover={{
                 y: -12,
                 boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
                 transition: { duration: 0.3 }
@@ -94,25 +94,27 @@ const Services = () => {
             >
               {/* Background gradient blob */}
               <div className="absolute -bottom-16 -right-16 w-32 h-32 bg-gradient-to-br opacity-10 dark:opacity-10 rounded-full filter blur-2xl transition-all duration-300 group-hover:scale-150 group-hover:opacity-30 dark:group-hover:opacity-20 group-hover:rotate-45 z-0"></div>
-              
-              <div className="relative z-10">
-                <div className={`w-16 h-16 bg-gradient-to-r ${service.color} ${service.darkColor} rounded-2xl p-4 text-white mb-8 ${service.shadowColor} shadow-lg transform-gpu transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
-                  <service.icon className="w-full h-full" />
+
+              <div className="relative z-10 flex flex-col justify-between h-full">
+                <div>
+                  <div className={`w-16 h-16 bg-gradient-to-r ${service.color} ${service.darkColor} rounded-2xl p-4 text-white mb-8 ${service.shadowColor} shadow-lg transform-gpu transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 mx-auto`}>
+                    <service.icon className="w-full h-full" />
+                  </div>
+
+                  <h3 className={`text-xl font-bold mb-4 bg-gradient-to-r ${service.color} text-transparent bg-clip-text dark:text-neon-primary text-center`}>
+                    {service.title}
+                  </h3>
+
+                  <p className="text-gray-600 dark:text-dark-text-secondary text-center">
+                    {service.description}
+                  </p>
                 </div>
-                
-                <h3 className={`text-xl font-bold mb-4 bg-gradient-to-r ${service.color} text-transparent bg-clip-text dark:text-neon-primary`}>
-                  {service.title}
-                </h3>
-                
-                <p className="text-gray-600 dark:text-dark-text-secondary">
-                  {service.description}
-                </p>
-                
-                <motion.div 
+
+                <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="mt-8"
+                  className="mt-auto pt-6"
                 >
                   <a href="#contact" className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${service.color} text-transparent bg-clip-text dark:text-neon-primary group-hover:underline`}>
                     {t.services.learnMore || "Saiba mais"}
@@ -122,6 +124,7 @@ const Services = () => {
                   </a>
                 </motion.div>
               </div>
+
             </motion.div>
           ))}
         </div>

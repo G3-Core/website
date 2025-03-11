@@ -72,9 +72,24 @@ export const en = {
       description: "We are not limited to outdated technologies. We use an arsenal of modern tools that ensure reduced delivery times and exceptional results.",
       subdescription: "Our team masters the most modern and innovative ones, allowing us to develop complete and high-performance projects.",
       advantage: "Our Competitive Advantage",
-      advantageDescription: "The combination of expertise in different technological generations allows us to create innovative solutions that are compatible with existing systems. We can gradually modernize complex infrastructures without disrupting operations.",
+      advantageDescription: "The combination of expertise in different technological generations allows us to create innovative solutions that are compatible with existing systems.",
       modern: "Modern Technologies",
-      legacy: "Legacy Technologies"
+      grid: {
+        react: "JavaScript library for building modern and reactive interfaces.",
+        nodejs: "JavaScript runtime environment for scalable server-side applications.",
+        typescript: "Superset of JavaScript with static typing for more robust code.",
+        nextjs: "React framework for full-featured web applications with SSR and SSG.",
+        threejs: "Library for creating 3D graphics in the browser using WebGL.",
+        tailwindcss: "Utility-first CSS framework for flexible and responsive design.",
+        materialui: "React component library with a Material Design look.",
+        firebase: "Development platform with various backend solutions.",
+        mongodb: "NoSQL document-oriented database.",
+        mysql: "Relational database management system.",
+        wordpress: "Popular CMS for creating and managing web content.",
+        javascript: "Interpreted programming language widely used in web development.",
+        html5: "Markup language for structuring web content.",
+        css3: "Styling language for web page design and layout."
+      }
     }
   },
   portfolio: {

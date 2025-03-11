@@ -13,7 +13,7 @@ const Header = () => {
   const { t } = useApp();
 
   const menuItems = [
-    { title: t.nav.home, to: 'hero' },
+    { title: t.nav.home, to: 'home' },
     { title: t.nav.about, to: 'about' },
     { title: t.nav.services, to: 'services' },
     { title: t.nav.portfolio, to: 'portfolio' },
@@ -41,6 +41,15 @@ const Header = () => {
     };
   }, [mobileMenuOpen]);
 
+  // Função para rolar até o topo com animação suave
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    setMobileMenuOpen(false);
+  };
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -48,13 +57,20 @@ const Header = () => {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || mobileMenuOpen
-          ? 'py-3 bg-white/80 dark:bg-black/80 '
-          : 'py-5'
+          ? 'py-3 bg-white/80 dark:bg-black/80 shadow-lg backdrop-blur-lg'
+          : 'py-5 bg-transparent'
       }`}
     >
       <div className="container flex justify-between items-center">
-        {/* Logo */}
-        <Logo />
+        {/* Logo com redirecionamento para o topo */}
+        <div 
+          onClick={scrollToTop} 
+          className="cursor-pointer"
+          role="button"
+          aria-label="Voltar ao topo"
+        >
+          <Logo />
+        </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center space-x-1">
@@ -100,7 +116,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/50 dark:bg-black/70  z-40 md:hidden"
+            className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm z-40 md:hidden"
             onClick={() => setMobileMenuOpen(false)}
           />
         )}

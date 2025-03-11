@@ -72,9 +72,24 @@ export const pt = {
       description: "Não nos limitamos a tecnologias ultrapassadas. Utilizamos um arsenal de ferramentas modernas que garantem prazos reduzidos e resultados excepcionais.",
       subdescription: "Nossa equipe domina as tecnologias mais modernas e inovadoras, permitindo desenvolver projetos completos e performáticos.",
       advantage: "Nossa Vantagem Competitiva",
-      advantageDescription: "A combinação de expertise em diferentes gerações tecnológicas nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes. Conseguimos modernizar gradualmente infraestruturas complexas sem interromper operações.",
+      advantageDescription: "A combinação de expertise em diferentes gerações tecnológicas nos permite criar soluções inovadoras, mas compatíveis com sistemas existentes.",
       modern: "Tecnologias Modernas",
-      legacy: "Tecnologias Legadas"
+      grid: {
+        react: "Biblioteca JavaScript para construção de interfaces modernas e reativas.",
+        nodejs: "Ambiente de execução JavaScript server-side para aplicações escaláveis.",
+        typescript: "Superset de JavaScript com tipagem estática para código mais robusto.",
+        nextjs: "Framework React para aplicações web completas com SSR e SSG.",
+        threejs: "Biblioteca para criação de gráficos 3D no navegador utilizando WebGL.",
+        tailwindcss: "Framework CSS utilitário para design flexível e responsivo.",
+        materialui: "Biblioteca de componentes React com visual Material Design.",
+        firebase: "Plataforma de desenvolvimento com diversas soluções backend.",
+        mongodb: "Banco de dados NoSQL orientado a documentos.",
+        mysql: "Sistema de gerenciamento de banco de dados relacional.",
+        wordpress: "CMS popular para criação e gerenciamento de conteúdo web.",
+        javascript: "Linguagem de programação interpretada e amplamente utilizada.",
+        html5: "Linguagem de marcação para estruturação de conteúdo web.",
+        css3: "Linguagem de estilização para design e layout de páginas web."
+      }
     },
     timeline: {
       foundation: {
