@@ -122,7 +122,7 @@ const Preloader = () => {
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          G3 Tech
+          G3 Core
         </motion.div>
       </motion.div>
     </motion.div>

@@ -1,5 +1,5 @@
 Olá, Tudo bem? 😊
-Sou da *G3 Tech*, especializada no desenvolvimento de sites modernos e eficientes. Notei que o *Planilhas de Obra* oferece soluções para 
+Sou da *G3 Core*, especializada no desenvolvimento de sites modernos e eficientes. Notei que o *Planilhas de Obra* oferece soluções para 
 orçamentos e controle de gastos na construção civil, com uma presença online sólida.
 
 Contudo, com a crescente demanda por acessibilidade e experiência do usuário, acredito que uma atualização no design e funcionalidades do 
@@ -19,4 +19,4 @@ Fico no aguardo!
 
 Atenciosamente,
 Gustavo Moraes
-*G3 Tech* 
+*G3 Core* 

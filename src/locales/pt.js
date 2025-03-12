@@ -152,7 +152,7 @@ export const pt = {
   },
   footer: {
     company: {
-      title: 'G3 Tech',
+      title: 'G3 Core',
       description: 'Transformando ideias em soluções digitais inovadoras para impulsionar seu negócio.',
     },
     contact: {
@@ -169,7 +169,7 @@ export const pt = {
         { name: 'Instagram', url: '#' },
       ],
     },
-    copyright: 'G3 Tech. Todos os direitos reservados.',
+    copyright: 'G3 Core. Todos os direitos reservados.',
   },
   theme: {
     toggle: 'Alternar tema',

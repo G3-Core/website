@@ -81,7 +81,7 @@ const CentralOrb = ({ position, size }) => {
         anchorX="center"
         anchorY="middle"
       >
-        G3 Tech
+        G3 Core
       </Text>
     </>
   );

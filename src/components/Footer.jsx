@@ -58,7 +58,7 @@ const Footer = () => {
               {/* Company Section */}
               <div className="flex flex-col items-center justify-center md:items-start md:justify-start">
                 <div className="flex items-center mb-6">
-                  <img src={logo} alt="G3 Tech Logo" className="h-10 w-auto mr-2" />
+                  <img src={logo} alt="G3 Core Logo" className="h-10 w-auto mr-2" />
                   <h3 className="text-xl font-bold text-primary dark:bg-gradient-to-r dark:from-neon-primary dark:to-neon-secondary dark:text-transparent dark:bg-clip-text">
                     {t.footer.company.title}
                   </h3>
