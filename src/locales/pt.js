@@ -8,6 +8,7 @@ export const pt = {
     cta: 'Comece Agora',
   },
   hero: {
+    badge: 'Tecnologia inovadora',
     title: 'Transforme sua presença digital com',
     highlight: 'soluções web inovadoras',
     description: 'Desenvolvemos soluções tecnológicas personalizadas que impulsionam seu negócio e encantam seus clientes.',
@@ -29,6 +30,7 @@ export const pt = {
     },
   },
   services: {
+    badge: 'Nossos serviços',
     title: 'Nossos Serviços',
     subtitle: 'Oferecemos soluções completas em desenvolvimento para transformar suas ideias em realidade.',
     web: {
@@ -43,6 +45,7 @@ export const pt = {
       title: 'Automações com IA',
       description: 'Soluções inteligentes para automatizar processos e aumentar a eficiência do seu negócio usando tecnologias de Inteligência Artificial.',
     },
+    learnMore: 'Saiba mais',
   },
   about: {
     badge: "Nossa História",

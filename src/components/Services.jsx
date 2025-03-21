@@ -114,7 +114,7 @@ const Services = () => {
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="mt-auto pt-6"
+                  className="mt-auto pt-6 flex justify-center"
                 >
                   <a href="#contact" className={`inline-flex items-center text-sm font-medium bg-gradient-to-r ${service.color} text-transparent bg-clip-text dark:text-neon-primary group-hover:underline`}>
                     {t.services.learnMore || "Saiba mais"}

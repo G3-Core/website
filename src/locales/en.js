@@ -8,6 +8,7 @@ export const en = {
     cta: 'Get Started',
   },
   hero: {
+    badge: 'Innovative Technology',
     title: 'Transform your digital presence with',
     highlight: 'innovative web solutions',
     description: 'We develop customized technological solutions that drive your business and delight your customers.',
@@ -29,6 +30,7 @@ export const en = {
     },
   },
   services: {
+    badge: 'Our Services',
     title: 'Our Services',
     subtitle: 'We offer complete development solutions to transform your ideas into reality.',
     web: {
@@ -43,6 +45,7 @@ export const en = {
       title: 'AI Automation',
       description: 'Intelligent solutions to automate processes and increase your business efficiency using Artificial Intelligence technologies.',
     },
+    learnMore: 'Learn more',
   },
   about: {
     badge: "Our Story",
