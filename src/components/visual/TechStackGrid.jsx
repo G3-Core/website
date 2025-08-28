@@ -26,9 +26,14 @@ const MaterialUI = () => {
 
 // Componente principal para o grid de tecnologias
 const TechStackGrid = () => {
-  const { t, theme } = useApp();
-  const [activeFilter, setActiveFilter] = useState('Todos');
+  const { t, theme, language } = useApp();
+  const [activeFilter, setActiveFilter] = useState(language === 'pt' ? 'Todos' : 'All');
   const isDarkTheme = theme === 'dark';
+  
+  // Atualizar filtro ativo quando o idioma mudar
+  useEffect(() => {
+    setActiveFilter(language === 'pt' ? 'Todos' : 'All');
+  }, [language]);
   
   const techIcons = {
     'React': <FaReact className="w-10 h-10 text-gray-900 dark:text-white" />,
@@ -63,11 +68,11 @@ const TechStackGrid = () => {
     'CSS3': t.about.techEvolution.grid.css3
   };
   
-  // Categorias das tecnologias
+  // Categorias das tecnologias baseadas no idioma
   const techCategories = {
     'React': 'Frontend',
     'Node.js': 'Backend',
-    'TypeScript': 'Linguagem',
+    'TypeScript': language === 'pt' ? 'Linguagens' : 'Languages',
     'Next.js': 'Frontend',
     'Three.js': 'Frontend',
     'Tailwind CSS': 'CSS',
@@ -77,19 +82,28 @@ const TechStackGrid = () => {
     'MySQL': 'Database',
     'WordPress': 'CMS',
     'PHP': 'Backend',
-    'JavaScript': 'Linguagem',
+    'JavaScript': language === 'pt' ? 'Linguagens' : 'Languages',
     'HTML5': 'Frontend',
     'CSS3': 'CSS',
   };
   
-  // Lista de filtros disponíveis
-  const filters = ['Todos', 'Frontend', 'Backend', 'Database', 'UI', 'CSS', 'Linguagem', 'CMS'];
+  // Lista de filtros disponíveis baseada no idioma
+  const filters = [
+    language === 'pt' ? 'Todos' : 'All',
+    'Frontend', 
+    'Backend', 
+    'Database', 
+    'UI', 
+    'CSS', 
+    language === 'pt' ? 'Linguagens' : 'Languages',
+    'CMS'
+  ];
   
   // Tecnologias a serem exibidas
   const technologies = Object.keys(techIcons);
   
   // Filtragem das tecnologias com base no filtro ativo
-  const filteredTechnologies = activeFilter === 'Todos'
+  const filteredTechnologies = (activeFilter === 'Todos' || activeFilter === 'All')
     ? technologies
     : technologies.filter(tech => techCategories[tech] === activeFilter);
 

@@ -1,3 +1,4 @@
+import { memo, useMemo, Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
 import {
@@ -7,14 +8,17 @@ import {
   InformationCircleIcon,
   ScaleIcon
 } from '@heroicons/react/24/outline';
-import AnimatedGradientOrbs from './visual/AnimatedGradientOrbs';
-import TechStackGrid from './visual/TechStackGrid';
-import ValuesPillars from './visual/ValuesPillars';
 
-const About = () => {
+// Lazy loading dos componentes visuais pesados
+const AnimatedGradientOrbs = lazy(() => import('./visual/AnimatedGradientOrbs'));
+const TechStackGrid = lazy(() => import('./visual/TechStackGrid'));
+const ValuesPillars = lazy(() => import('./visual/ValuesPillars'));
+
+const About = memo(() => {
   const { t } = useApp();
 
-  const values = [
+  // Memoização dos valores para evitar re-renders desnecessários
+  const values = useMemo(() => [
     {
       icon: LightBulbIcon,
       title: t.about.values.innovation.title,
@@ -30,27 +34,29 @@ const About = () => {
       title: t.about.values.integrity.title,
       description: t.about.values.integrity.description,
     },
-  ];
+  ], [t.about.values]);
 
   return (
     <section id="about" className="py-20 relative overflow-hidden bg-white dark:bg-black">
       {/* Background com gradientes sutis */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-blue-50/50 dark:from-black dark:via-black dark:to-black z-0"></div>
 
-      {/* Orbes de gradiente */}
+      {/* Orbes de gradiente com lazy loading */}
       <div className="absolute inset-0 z-0 opacity-30">
-        <AnimatedGradientOrbs
-          count={3}
-          colors={[
-            ['#3b82f6', '#93c5fd'],
-            ['#104F89', '#00BFFF'],
-            ['#00BFFF', '#104F89']
-          ]}
-          minOpacity={0.1}
-          maxOpacity={0.2}
-          minSize={250}
-          maxSize={450}
-        />
+        <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-blue-100/20 to-purple-100/20 dark:from-blue-900/10 dark:to-purple-900/10" />}>
+          <AnimatedGradientOrbs
+            count={3}
+            colors={[
+              ['#3b82f6', '#93c5fd'],
+              ['#104F89', '#00BFFF'],
+              ['#00BFFF', '#104F89']
+            ]}
+            minOpacity={0.1}
+            maxOpacity={0.2}
+            minSize={250}
+            maxSize={450}
+          />
+        </Suspense>
       </div>
 
       <div className="container relative z-10">
@@ -111,7 +117,15 @@ const About = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-neon-primary/5 dark:to-neon-secondary/5 rounded-2xl transform -rotate-1"></div>
             <div className="relative bg-white/50 dark:bg-black/30 backdrop-blur-sm p-6 md:p-10 rounded-2xl">
-              <TechStackGrid />
+              <Suspense fallback={
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <div key={i} className="bg-gray-200 dark:bg-gray-700 rounded-xl h-32 animate-pulse" />
+                  ))}
+                </div>
+              }>
+                <TechStackGrid />
+              </Suspense>
             </div>
           </motion.div>
 
@@ -150,13 +164,21 @@ const About = () => {
           <div className="relative max-w-4xl mx-auto">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 dark:from-neon-primary/5 dark:to-neon-secondary/5 rounded-2xl transform rotate-1"></div>
             <div className="relative bg-white/50 dark:bg-black/30 backdrop-blur-sm rounded-2xl overflow-hidden">
-              <ValuesPillars values={values} />
+              <Suspense fallback={
+                <div className="grid md:grid-cols-3 gap-6 p-6">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <div key={i} className="bg-gray-200 dark:bg-gray-700 rounded-xl h-40 animate-pulse" />
+                  ))}
+                </div>
+              }>
+                <ValuesPillars values={values} />
+              </Suspense>
             </div>
           </div>
         </div>
       </div>
     </section>
   );
-};
+});
 
 export default About; 

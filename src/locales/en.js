@@ -89,9 +89,9 @@ export const en = {
         mongodb: "NoSQL document-oriented database.",
         mysql: "Relational database management system.",
         wordpress: "Popular CMS for creating and managing web content.",
-        javascript: "Interpreted programming language widely used in web development.",
-        html5: "Markup language for structuring web content.",
-        css3: "Styling language for web page design and layout."
+        javascript: "Interpreted programming language widely used in modern web development.",
+        html5: "Standard markup language for structuring web content.",
+        css3: "Advanced styling language for web page design and layout."
       }
     }
   },

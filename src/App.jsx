@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { AppProvider } from './contexts/AppContext'
 import Header from './components/Header'
-import Hero from './components/Hero'
-import Services from './components/Services'
-import About from './components/About'
-import Portfolio from './components/Portfolio'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
 import { motion, AnimatePresence } from 'framer-motion';
+
+// Lazy loading dos componentes principais para melhor performance inicial
+const Hero = lazy(() => import('./components/Hero'));
+const Services = lazy(() => import('./components/Services'));
+const About = lazy(() => import('./components/About'));
+const Portfolio = lazy(() => import('./components/Portfolio'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
 
 import './App.css';
 
@@ -134,10 +136,10 @@ function App() {
 
   // Efeito para simular carregamento e ativar as animações de scroll reveal
   useEffect(() => {
-    // Simular tempo de carregamento
+    // Tempo de carregamento otimizado para melhor experiência do usuário
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1200);
 
     const handleScroll = () => {
       const revealElements = document.querySelectorAll('.reveal-on-scroll');
@@ -204,13 +206,54 @@ function App() {
           <Header />
         </div>
         <main className="dark:bg-black">
-          <Hero />
-          <Services />
-          <About />
-          <Portfolio />
-          <Contact />
+          <Suspense fallback={
+            <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
+              <div className="w-16 h-16 border-4 border-primary dark:border-neon-primary border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <Hero />
+          </Suspense>
+          
+          <Suspense fallback={
+            <div className="h-96 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary dark:border-neon-primary border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <Services />
+          </Suspense>
+          
+          <Suspense fallback={
+            <div className="h-96 bg-white dark:bg-black flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary dark:border-neon-primary border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <About />
+          </Suspense>
+          
+          <Suspense fallback={
+            <div className="h-96 bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary dark:border-neon-primary border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <Portfolio />
+          </Suspense>
+          
+          <Suspense fallback={
+            <div className="h-96 bg-white dark:bg-black flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-primary dark:border-neon-primary border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          }>
+            <Contact />
+          </Suspense>
         </main>
-        <Footer />
+        
+        <Suspense fallback={
+          <div className="h-32 bg-gray-100 dark:bg-gray-900 flex items-center justify-center">
+            <div className="w-6 h-6 border-2 border-primary dark:border-neon-primary border-t-transparent rounded-full animate-spin"></div>
+          </div>
+        }>
+          <Footer />
+        </Suspense>
       </div>
     </AppProvider>
   );

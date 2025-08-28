@@ -89,9 +89,9 @@ export const pt = {
         mongodb: "Banco de dados NoSQL orientado a documentos.",
         mysql: "Sistema de gerenciamento de banco de dados relacional.",
         wordpress: "CMS popular para criação e gerenciamento de conteúdo web.",
-        javascript: "Linguagem de programação interpretada e amplamente utilizada.",
-        html5: "Linguagem de marcação para estruturação de conteúdo web.",
-        css3: "Linguagem de estilização para design e layout de páginas web."
+        javascript: "Linguagem de programação interpretada e amplamente utilizada no desenvolvimento web.",
+        html5: "Linguagem de marcação padrão para estruturação de conteúdo web.",
+        css3: "Linguagem de estilização avançada para design e layout de páginas web."
       }
     },
     timeline: {

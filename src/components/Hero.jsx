@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState, memo, useMemo, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
 import {
@@ -7,12 +7,14 @@ import {
   ShieldCheckIcon,
   StarIcon
 } from '@heroicons/react/24/outline';
-import TechScene from './3d/TechScene';
-import InteractiveParticleBackground from './visual/InteractiveParticleBackground';
-import AnimatedGradientOrbs from './visual/AnimatedGradientOrbs';
-import AnimatedTextHighlight from './visual/AnimatedTextHighlight';
 
-const Hero = () => {
+// Lazy loading dos componentes pesados para melhor performance
+const TechScene = lazy(() => import('./3d/TechScene'));
+const InteractiveParticleBackground = lazy(() => import('./visual/InteractiveParticleBackground'));
+const AnimatedGradientOrbs = lazy(() => import('./visual/AnimatedGradientOrbs'));
+const AnimatedTextHighlight = lazy(() => import('./visual/AnimatedTextHighlight'));
+
+const Hero = memo(() => {
   const { t } = useApp();
   const [mounted, setMounted] = useState(false);
   const [has3DError, setHas3DError] = useState(false);
@@ -38,7 +40,8 @@ const Hero = () => {
     };
   }, []);
 
-  const values = [
+  // Memoização dos valores da empresa para evitar re-renders desnecessários
+  const values = useMemo(() => [
     {
       icon: LightBulbIcon,
       title: t.hero.values.innovation.title,
@@ -54,34 +57,38 @@ const Hero = () => {
       title: t.hero.values.ethics.title,
       text: t.hero.values.ethics.text,
     },
-  ];
+  ], [t.hero.values]);
 
   return (
     <section id="home" className="pt-32 pb-20 relative overflow-hidden">
-      {/* Novos elementos de background interativos */}
+      {/* Novos elementos de background interativos com lazy loading */}
       <div className="absolute inset-0 z-0">
-        <InteractiveParticleBackground
-          particleCount={50}
-          colors={['#3b82f6', '#8b5cf6', '#ec4899']}
-          speed={1.5}
-          interactive={true}
-          minSize={2}
-          maxSize={6}
-        />
+        <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-black opacity-50" />}>
+          <InteractiveParticleBackground
+            particleCount={50}
+            colors={['#3b82f6', '#8b5cf6', '#ec4899']}
+            speed={1.5}
+            interactive={true}
+            minSize={2}
+            maxSize={6}
+          />
+        </Suspense>
       </div>
 
       <div className="absolute inset-0 z-0 opacity-60">
-        <AnimatedGradientOrbs
-          count={4}
-          colors={[
-            ['#3b82f6', '#60a5fa'],
-            ['#8b5cf6', '#a78bfa'],
-            ['#ec4899', '#f472b6'],
-            ['#06b6d4', '#67e8f9']
-          ]}
-          minOpacity={0.15}
-          maxOpacity={0.35}
-        />
+        <Suspense fallback={<div className="w-full h-full bg-gradient-to-r from-blue-100/20 to-purple-100/20 dark:from-blue-900/10 dark:to-purple-900/10" />}>
+          <AnimatedGradientOrbs
+            count={4}
+            colors={[
+              ['#3b82f6', '#60a5fa'],
+              ['#8b5cf6', '#a78bfa'],
+              ['#ec4899', '#f472b6'],
+              ['#06b6d4', '#67e8f9']
+            ]}
+            minOpacity={0.15}
+            maxOpacity={0.35}
+          />
+        </Suspense>
       </div>
 
       <div className="container relative z-10 -mt-[80px]">
@@ -100,11 +107,13 @@ const Hero = () => {
                   <StarIcon className="flex-shrink-0 w-10 h-10 mr-2 text-primary dark:text-neon-primary" />
                   <span>
                     {t.hero.title}{' '}
-                    <AnimatedTextHighlight
-                      text={t.hero.highlight}
-                      duration={4}
-                      colors={['#3b82f6', '#8b5cf6', '#ec4899']}
-                    />
+                    <Suspense fallback={<span className="text-primary dark:text-neon-primary">{t.hero.highlight}</span>}>
+                      <AnimatedTextHighlight
+                        text={t.hero.highlight}
+                        duration={4}
+                        colors={['#3b82f6', '#8b5cf6', '#ec4899']}
+                      />
+                    </Suspense>
                   </span>
                 </div>
               </h1>
@@ -115,7 +124,7 @@ const Hero = () => {
             <div className="flex flex-wrap gap-4">
               <motion.a
                 href="#contact"
-                className="btn-primary dark:bg-neon-primary dark:text-dark-bg dark:border-neon-primary dark:neon-border"
+                className="btn-primary dark:bg-neon-primary dark:text-dark-bg dark:border-neon-primary dark:neon-border w-full sm:w-auto sm:min-w-[560px] px-16 py-6 text-2xl font-bold text-center"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 style={{ marginTop: "-10px" }}  // Ajuste esse valor conforme necessário
@@ -198,7 +207,7 @@ const Hero = () => {
       </div>
     </section>
   );
-};
+});
 
 // Componente de fallback caso a cena 3D não carregue
 const FallbackImage = () => (

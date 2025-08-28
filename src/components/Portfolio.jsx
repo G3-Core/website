@@ -1,10 +1,10 @@
+import { memo, useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
 import { useApp } from '../contexts/AppContext';
 import { ArrowTopRightOnSquareIcon, FolderIcon } from '@heroicons/react/24/outline';
 import vonicWebsiteVideo from '../../public/portfolio/vonic_systems_project.mp4'
 
-const Portfolio = () => {
+const Portfolio = memo(() => {
   const { t } = useApp();
   const [hovered, setHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -25,8 +25,8 @@ const Portfolio = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Dados do primeiro projeto
-  const project = {
+  // Memoização dos dados do projeto para evitar re-renders desnecessários
+  const project = useMemo(() => ({
     title: t.portfolio.vonicsystems.title,
     description: t.portfolio.vonicsystems.description,
     tags: t.portfolio.vonicsystems.tags,
@@ -34,7 +34,7 @@ const Portfolio = () => {
     image: "/portfolio/vonic-systems.jpg",
     color: "from-blue-500 to-cyan-500",
     darkColor: "dark:from-neon-primary dark:to-neon-secondary",
-  };
+  }), [t.portfolio.vonicsystems]);
 
   // Renderizar conteúdo do projeto
   const ProjectContent = () => (
@@ -305,6 +305,6 @@ const Portfolio = () => {
       </div>
     </section>
   );
-};
+});
 
 export default Portfolio; 
